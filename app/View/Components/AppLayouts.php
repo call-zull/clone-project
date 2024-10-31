@@ -21,6 +21,6 @@ class AppLayouts extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('admin.layouts.app');
+        return view('layouts.app');
     }
 }

@@ -13,3 +13,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin', function () {
     return view('admin.index');
 });
+
+Route::get('/dosen', function () {
+    return view('dosen.index');
+});
+
+Route::get('/mentor', function () {
+    return view('mentor.index');
+});
+
+Route::get('/mahasiswa', function () {
+    return view('mahasiswa.index');
+});
