@@ -39,7 +39,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            PositionSeeder::class
+            PositionSeeder::class,
+            BatchSeeder::class,
+            ProjectSeeder::class
         ]);
     }
 }
