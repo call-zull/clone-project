@@ -1,4 +1,15 @@
 <x-app-layouts>
+    @if(auth()->check())
+    @auth
+        <!-- Navigasi atau konten khusus pengguna yang sudah login -->
+    @endauth
+@else
+    @guest
+    <script>
+        window.location.href = "{{ route('login') }}";
+    </script>
+    @endguest
+@endif
     @auth
         <div class="app-content-header">
             <div class="container-fluid">
