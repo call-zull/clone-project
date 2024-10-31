@@ -8,7 +8,8 @@
 
                     <div class="mb-3">
                         <label for="name" class="form-label">{{ __('Name') }}</label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                            name="name" value="{{ old('name') }}" autofocus>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -18,7 +19,8 @@
 
                     <div class="mb-3">
                         <label for="email" class="form-label">{{ __('Email Address') }}</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -27,8 +29,29 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="position" class="form-label">Position</label>
+                        <div>
+                            @foreach ($positions as $position)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="position_id"
+                                        id="position{{ $position->id }}" value="{{ $position->id }}">
+                                    <label class="form-check-label" for="position{{ $position->id }}">
+                                        {{ $position->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                            @error('position_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="password" class="form-label">{{ __('Password') }}</label>
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                        <input id="password" type="password"
+                            class="form-control @error('password') is-invalid @enderror" name="password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -38,7 +61,7 @@
 
                     <div class="mb-3">
                         <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                     </div>
 
                     <div class="d-grid">
@@ -50,7 +73,7 @@
                     <div class="mt-3 text-center">
                         <span>Already have an account ? </span>
                         <a class="text-decoration-none" href="{{ route('login') }}">
-                           login
+                            login
                         </a>
                     </div>
                 </form>

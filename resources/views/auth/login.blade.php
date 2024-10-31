@@ -1,6 +1,6 @@
 <x-app-layouts>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
-        <div class="p-4 shadow-lg card" style="width: 400px; border-radius: 10px;">
+        <div class="p-4 shadow-lg card" style="width: 500px; border-radius: 10px;">
             <div class="card-body">
                 <h3 class="mb-4 text-center" style="font-weight: bold;">Login</h3>
                 <form method="POST" action="{{ route('login') }}">
