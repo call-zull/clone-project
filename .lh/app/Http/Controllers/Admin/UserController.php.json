@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Http/Controllers/Admin/UserController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730426331805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730426331805,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Admin;\n\nuse App\\Http\\Controllers\\Controller;\nuse App\\Models\\User;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Hash;\nuse Illuminate\\Support\\Facades\\Validator;\n\nclass UserController extends Controller\n{\n    public function index()\n    {\n        $users = User::all();\n        return view('admin.users.index', compact('users'));\n    }\n\n    public function create()\n    {\n        return view('admin.users.create');\n    }\n\n    public function store(Request $request)\n    {\n        $this->validate($request, [\n            'name' => 'required|string|max:255',\n            'email' => 'required|string|email|max:255|unique:users',\n            'password' => 'required|string|min:8|confirmed',\n            'role' => 'required|string|in:admin,mentor,dosen,mahasiswa',\n        ]);\n\n        User::create([\n            'name' => $request->name,\n            'email' => $request->email,\n            'password' => Hash::make($request->password),\n            'role' => $request->role,\n        ]);\n\n        return redirect()->route('admin.users.index')->with('success', 'User berhasil dibuat.');\n    }\n\n    public function edit(User $user)\n    {\n        return view('admin.users.edit', compact('user'));\n    }\n\n    public function update(Request $request, User $user)\n    {\n        $this->validate($request, [\n            'name' => 'required|string|max:255',\n            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,\n            'password' => 'nullable|string|min:8|confirmed',\n            'role' => 'required|string|in:admin,mentor,dosen,mahasiswa',\n        ]);\n\n        $user->name = $request->name;\n        $user->email = $request->email;\n        if ($request->filled('password')) {\n            $user->password = Hash::make($request->password);\n        }\n        $user->role = $request->role;\n        $user->save();\n\n        return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui.');\n    }\n\n    public function destroy(User $user)\n    {\n        $user->delete();\n        return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus.');\n    }\n}"
+        }
+    ]
+}

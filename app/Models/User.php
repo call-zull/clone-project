@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\RoleEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'position_id',
     ];
 
     /**
@@ -45,4 +50,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function roleDescription(): Attribute
+    {
+        return Attribute::make(fn() => $this->role ? RoleEnum::getDescription((int) $this->role) : null);
+    }
+
+    // public function hasRole($role)
+    // {
+    //     return $this->role === $role;
+    // }
+
 }
