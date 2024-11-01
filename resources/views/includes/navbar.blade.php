@@ -25,20 +25,24 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-
-                @if (Auth::user()->role == 'admin'||'dosen'||'mentor')
+                @if (Auth::user()->role === 'admin')
                     <li class="nav-item">
                         <a href="{{ route('users.index') }}" class="nav-link">
                             <i class="nav-icon bi bi-person"></i>
                             <p>User</p>
                         </a>
                     </li>
-                <li class="nav-item"> <a href="{{ route('admin.bacth.index') }}" class="nav-link"> <i
-                            class="nav-icon bi bi-palette"></i>
-                        <p>Batch</p>
-                    </a> </li>
-
                 @endif
+
+                @if (in_array(Auth::user()->role, ['admin', 'dosen', 'mentor']))
+                    <li class="nav-item">
+                        <a href="{{ route('admin.bacth.index') }}" class="nav-link">
+                            <i class="nav-icon bi bi-palette"></i>
+                            <p>Batch</p>
+                        </a>
+                    </li>
+                @endif
+
 
                 <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-seam-fill"></i>
                         <p>

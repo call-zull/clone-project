@@ -17,7 +17,6 @@
         </div>
     </div>
     <div class="container">
-
         <a href="{{ route('users.create') }}" class="mb-3 btn btn-primary">Tambah Pengguna</a>
         <div class="p-0 card-body">
             <div class="table-responsive">
