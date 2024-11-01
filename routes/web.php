@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BatchController as AdminBatchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,4 +28,14 @@ Route::get('/admin', function () {
 
 Route::get('/dosen', function () {
     return view('dosen.index');
-})->name('dosen.dashboard')->middleware('role:dosen');
+});
+
+Route::get('/mentor', function () {
+    return view('mentor.index');
+});
+
+Route::get('/mahasiswa', function () {
+    return view('mahasiswa.index');
+});
+
+route::get('/bacth', [AdminBatchController::class, 'index'])->name('admin.bacth.index');
