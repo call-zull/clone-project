@@ -1,7 +1,7 @@
 <x-app-layouts>
     <div class="container">
         <h1>Ubah Pengguna</h1>
-        <form action="{{ route('admin.users.update', $user) }}" method="POST">
+        <form action="{{ route('users.update', $user) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">

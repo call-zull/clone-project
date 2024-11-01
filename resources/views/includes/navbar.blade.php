@@ -26,9 +26,9 @@
                     </a>
                 </li>
 
-                @if (Auth::user()->role == ['admin','dosen','mentor'])
+                @if (Auth::user()->role == 'admin'||'dosen'||'mentor')
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ route('users.index') }}" class="nav-link">
                             <i class="nav-icon bi bi-person"></i>
                             <p>User</p>
                         </a>

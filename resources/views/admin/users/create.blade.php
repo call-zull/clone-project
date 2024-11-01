@@ -1,7 +1,7 @@
 <x-app-layouts>
     <div class="container">
         <h1>Tambah Pengguna</h1>
-        <form action="{{ route('admin.users.store') }}" method="POST">
+        <form action="{{ route('users.store') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Nama</label>

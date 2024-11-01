@@ -1,6 +1,4 @@
 <x-app-layouts>
-    @if(auth()->check())
-    @auth
     <div class="app-content-header">
         <div class="container-fluid">
             <div class="row">
@@ -93,12 +91,4 @@
             </div>
         </div>
     </div>
-    @endauth
-@else
-    @guest
-    <script>
-        window.location.href = "{{ route('login') }}";
-    </script>
-    @endguest
-@endif
 </x-app-layouts>

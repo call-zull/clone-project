@@ -15,8 +15,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     })->name('admin.dashboard');
-
-
+    
     Route::resource('admin/users', UserController::class);
 });
 
