@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BatchController as AdminBatchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,3 +26,5 @@ Route::get('/mentor', function () {
 Route::get('/mahasiswa', function () {
     return view('mahasiswa.index');
 });
+
+route::get('/bacth', [AdminBatchController::class, 'index'])->name('admin.bacth.index');
