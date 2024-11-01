@@ -55,4 +55,10 @@ class User extends Authenticatable
     {
         return Attribute::make(fn() => $this->role ? RoleEnum::getDescription((int) $this->role) : null);
     }
+
+    // public function hasRole($role)
+    // {
+    //     return $this->role === $role;
+    // }
+
 }
