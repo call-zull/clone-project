@@ -1,0 +1,78 @@
+{
+    "sourceFile": "routes/web.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 15,
+            "patches": [
+                {
+                    "date": 1730423729469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730424324947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n });\n \n Auth::routes();\n \n-Route::get('/home', [App\\Http\\Controllers\\HomeController::class, 'index'])->name('home');\n+// Route::get('/home', [App\\Http\\Controllers\\HomeController::class, 'index'])->name('home');\n \n Route::get('/mahasiswa', function () {\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n"
+                },
+                {
+                    "date": 1730425061210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,11 @@\n });\n \n Auth::routes();\n \n-// Route::get('/home', [App\\Http\\Controllers\\HomeController::class, 'index'])->name('home');\n+Route::get('/home', function () {\n+    return view('home'); // Ganti dengan view yang sesuai\n+})->name('home');\n \n Route::get('/mahasiswa', function () {\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n"
+                },
+                {
+                    "date": 1730425143799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,11 +7,8 @@\n });\n \n Auth::routes();\n \n-Route::get('/home', function () {\n-    return view('home'); // Ganti dengan view yang sesuai\n-})->name('home');\n \n Route::get('/mahasiswa', function () {\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n"
+                },
+                {
+                    "date": 1730425149239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n });\n \n Auth::routes();\n \n-\n Route::get('/mahasiswa', function () {\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n \n"
+                },
+                {
+                    "date": 1730426349876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,12 @@\n Route::get('/mahasiswa', function () {\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n \n+Route::middleware(['auth', 'role:admin'])->group(function () {\n+    Route::resource('admin/users', UserController::class);\n+});\n+\n Route::get('/mentor', function () {\n     return view('mentor.index');\n })->name('mentor.dashboard')->middleware('role:mentor');\n \n"
+                },
+                {
+                    "date": 1730426456174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n <?php\n \n+use App\\Http\\Controllers\\Admin\\UserController;\n use Illuminate\\Support\\Facades\\Route;\n \n Route::get('/', function () {\n     return view('welcome');\n"
+                },
+                {
+                    "date": 1730427121751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n use App\\Http\\Controllers\\Admin\\UserController;\n use Illuminate\\Support\\Facades\\Route;\n \n Route::get('/', function () {\n-    return view('welcome');\n+    // return view('welcome');\n });\n \n Auth::routes();\n \n"
+                },
+                {
+                    "date": 1730427138504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n use App\\Http\\Controllers\\Admin\\UserController;\n use Illuminate\\Support\\Facades\\Route;\n \n Route::get('/', function () {\n-    // return view('welcome');\n+    return view('welcome');\n });\n \n Auth::routes();\n \n"
+                },
+                {
+                    "date": 1730427517253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n \n Route::middleware(['auth', 'role:admin'])->group(function () {\n-    Route::resource('admin/users', UserController::class);\n+    Route::resource('users/index', UserController::class);\n });\n \n Route::get('/mentor', function () {\n     return view('mentor.index');\n"
+                },
+                {
+                    "date": 1730427578379,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n \n Route::middleware(['auth', 'role:admin'])->group(function () {\n-    Route::resource('users/index', UserController::class);\n+    Route::resource('users/', UserController::class);\n });\n \n Route::get('/mentor', function () {\n     return view('mentor.index');\n"
+                },
+                {
+                    "date": 1730427588700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n \n Route::middleware(['auth', 'role:admin'])->group(function () {\n-    Route::resource('users/', UserController::class);\n+    Route::resource('admin/users', UserController::class);\n });\n \n Route::get('/mentor', function () {\n     return view('mentor.index');\n"
+                },
+                {
+                    "date": 1730427595142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,10 @@\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n \n Route::middleware(['auth', 'role:admin'])->group(function () {\n-    Route::resource('admin/users', UserController::class);\n });\n+Route::resource('admin/users', UserController::class);\n \n Route::get('/mentor', function () {\n     return view('mentor.index');\n })->name('mentor.dashboard')->middleware('role:mentor');\n"
+                },
+                {
+                    "date": 1730427608644,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n Route::get('/mahasiswa', function () {\n     return view('mahasiswa.index');\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n \n-Route::middleware(['auth', 'role:admin'])->group(function () {\n-});\n+// Route::middleware(['auth', 'role:admin'])->group(function () {\n+// });\n Route::resource('admin/users', UserController::class);\n \n Route::get('/mentor', function () {\n     return view('mentor.index');\n"
+                },
+                {
+                    "date": 1730427764356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <?php\n \n-use App\\Http\\Controllers\\Admin\\UserController;\n+// use App\\Http\\Controllers\\Admin\\UserController;\n use Illuminate\\Support\\Facades\\Route;\n \n Route::get('/', function () {\n     return view('welcome');\n@@ -14,9 +14,9 @@\n })->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n \n // Route::middleware(['auth', 'role:admin'])->group(function () {\n // });\n-Route::resource('admin/users', UserController::class);\n+// Route::resource('admin/users', UserController::class);\n \n Route::get('/mentor', function () {\n     return view('mentor.index');\n })->name('mentor.dashboard')->middleware('role:mentor');\n"
+                },
+                {
+                    "date": 1730427772597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <?php\n \n-// use App\\Http\\Controllers\\Admin\\UserController;\n+use App\\Http\\Controllers\\Admin\\UserController;\n use Illuminate\\Support\\Facades\\Route;\n \n Route::get('/', function () {\n     return view('welcome');\n"
+                }
+            ],
+            "date": 1730423729469,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/', function () {\n    return view('welcome');\n});\n\nAuth::routes();\n\nRoute::get('/home', [App\\Http\\Controllers\\HomeController::class, 'index'])->name('home');\n\nRoute::get('/mahasiswa', function () {\n    return view('mahasiswa.index');\n})->name('mahasiswa.dashboard')->middleware('role:mahasiswa');\n\nRoute::get('/mentor', function () {\n    return view('mentor.index');\n})->name('mentor.dashboard')->middleware('role:mentor');\n\nRoute::get('/admin', function () {\n    return view('admin.index');\n})->name('admin.dashboard')->middleware('role:admin');\n\nRoute::get('/dosen', function () {\n    return view('dosen.index');\n})->name('dosen.dashboard')->middleware('role:dosen');"
+        }
+    ]
+}

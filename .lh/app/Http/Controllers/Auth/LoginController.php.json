@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/Http/Controllers/Auth/LoginController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1730423690190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730423698224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace App\\Http\\Controllers\\Auth;\n \n use App\\Http\\Controllers\\Controller;\n use Illuminate\\Foundation\\Auth\\AuthenticatesUsers;\n+use Illuminate\\Support\\Facades\\Request;\n \n class LoginController extends Controller\n {\n     /*\n"
+                },
+                {
+                    "date": 1730424228213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,29 +3,19 @@\n namespace App\\Http\\Controllers\\Auth;\n \n use App\\Http\\Controllers\\Controller;\n use Illuminate\\Foundation\\Auth\\AuthenticatesUsers;\n-use Illuminate\\Support\\Facades\\Request;\n+use Illuminate\\Http\\Request; // Ubah ini\n \n class LoginController extends Controller\n {\n-    /*\n-    |--------------------------------------------------------------------------\n-    | Login Controller\n-    |--------------------------------------------------------------------------\n-    |\n-    | This controller handles authenticating users for the application and\n-    | redirecting them to your home screen. The controller uses a trait\n-    | to conveniently provide its functionality to your applications.\n-    |\n-    */\n+    use AuthenticatesUsers;\n \n-    use AuthenticatesUsers;\n     protected function authenticated(Request $request, $user)\n     {\n         switch ($user->role) {\n             case 'mahasiswa':\n-                return redirect()->route('mahasiswa.dashboard'); // Asumsikan Anda mendefinisikan rute ini\n+                return redirect()->route('mahasiswa.dashboard');\n             case 'mentor':\n                 return redirect()->route('mentor.dashboard');\n             case 'admin':\n                 return redirect()->route('admin.dashboard');\n@@ -35,21 +25,10 @@\n                 return redirect('/home'); // Fallback\n         }\n     }\n \n-\n-    /**\n-     * Where to redirect users after login.\n-     *\n-     * @var string\n-     */\n     protected $redirectTo = '/home';\n \n-    /**\n-     * Create a new controller instance.\n-     *\n-     * @return void\n-     */\n     public function __construct()\n     {\n         $this->middleware('guest')->except('logout');\n         $this->middleware('auth')->only('logout');\n"
+                },
+                {
+                    "date": 1730425438961,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n                 return redirect()->route('admin.dashboard');\n             case 'dosen':\n                 return redirect()->route('dosen.dashboard');\n             default:\n-                return redirect('/home'); // Fallback\n+                return redirect('/'); // Fallback\n         }\n     }\n \n     protected $redirectTo = '/home';\n"
+                }
+            ],
+            "date": 1730423690190,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Auth;\n\nuse App\\Http\\Controllers\\Controller;\nuse Illuminate\\Foundation\\Auth\\AuthenticatesUsers;\n\nclass LoginController extends Controller\n{\n    /*\n    |--------------------------------------------------------------------------\n    | Login Controller\n    |--------------------------------------------------------------------------\n    |\n    | This controller handles authenticating users for the application and\n    | redirecting them to your home screen. The controller uses a trait\n    | to conveniently provide its functionality to your applications.\n    |\n    */\n\n    use AuthenticatesUsers;\n    protected function authenticated(Request $request, $user)\n{\n    switch ($user->role) {\n        case 'mahasiswa':\n            return redirect()->route('mahasiswa.dashboard'); // Asumsikan Anda mendefinisikan rute ini\n        case 'mentor':\n            return redirect()->route('mentor.dashboard');\n        case 'admin':\n            return redirect()->route('admin.dashboard');\n        case 'dosen':\n            return redirect()->route('dosen.dashboard');\n        default:\n            return redirect('/home'); // Fallback\n    }\n}\n\n\n    /**\n     * Where to redirect users after login.\n     *\n     * @var string\n     */\n    protected $redirectTo = '/home';\n\n    /**\n     * Create a new controller instance.\n     *\n     * @return void\n     */\n    public function __construct()\n    {\n        $this->middleware('guest')->except('logout');\n        $this->middleware('auth')->only('logout');\n    }\n}"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/admin/users/index.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730426487031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730426487031,
+            "name": "Commit-0",
+            "content": "<x-app-layouts>\r\n    <div class=\"container\">\r\n        <h1>Daftar Pengguna</h1>\r\n        <a href=\"{{ route('admin.users.create') }}\" class=\"btn btn-primary\">Tambah Pengguna</a>\r\n        <table class=\"table\">\r\n            <thead>\r\n                <tr>\r\n                    <th>ID</th>\r\n                    <th>Nama</th>\r\n                    <th>Email</th>\r\n                    <th>Peran</th>\r\n                    <th>Aksi</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                @foreach($users as $user)\r\n                    <tr>\r\n                        <td>{{ $user->id }}</td>\r\n                        <td>{{ $user->name }}</td>\r\n                        <td>{{ $user->email }}</td>\r\n                        <td>{{ $user->role }}</td>\r\n                        <td>\r\n                            <a href=\"{{ route('admin.users.edit', $user) }}\" class=\"btn btn-warning\">Ubah</a>\r\n                            <form action=\"{{ route('admin.users.destroy', $user) }}\" method=\"POST\" style=\"display:inline;\">\r\n                                @csrf\r\n                                @method('DELETE')\r\n                                <button type=\"submit\" class=\"btn btn-danger\">Hapus</button>\r\n                            </form>\r\n                        </td>\r\n                    </tr>\r\n                @endforeach\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</x-app-layouts>\r\n"
+        }
+    ]
+}

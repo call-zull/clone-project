@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,20 +9,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/mahasiswa', function () {
+    return view('mahasiswa.index');
+})->name('mahasiswa.dashboard')->middleware('role:mahasiswa');
 
-Route::get('/admin', function () {
-    return view('admin.index');
-});
-
-Route::get('/dosen', function () {
-    return view('dosen.index');
-});
+// Route::middleware(['auth', 'role:admin'])->group(function () {
+// });
+// Route::resource('admin/users', UserController::class);
 
 Route::get('/mentor', function () {
     return view('mentor.index');
-});
+})->name('mentor.dashboard')->middleware('role:mentor');
 
-Route::get('/mahasiswa', function () {
-    return view('mahasiswa.index');
-});
+Route::get('/admin', function () {
+    return view('admin.index');
+})->name('admin.dashboard')->middleware('role:admin');
+
+Route::get('/dosen', function () {
+    return view('dosen.index');
+})->name('dosen.dashboard')->middleware('role:dosen');

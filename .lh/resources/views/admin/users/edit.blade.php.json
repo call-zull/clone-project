@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/admin/users/edit.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730426535429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730426535429,
+            "name": "Commit-0",
+            "content": "<x-app-layouts>\r\n    <div class=\"container\">\r\n        <h1>Ubah Pengguna</h1>\r\n        <form action=\"{{ route('admin.users.update', $user) }}\" method=\"POST\">\r\n            @csrf\r\n            @method('PUT')\r\n            <div class=\"mb-3\">\r\n                <label for=\"name\" class=\"form-label\">Nama</label>\r\n                <input type=\"text\" class=\"form-control\" name=\"name\" value=\"{{ $user->name }}\" required>\r\n            </div>\r\n            <div class=\"mb-3\">\r\n                <label for=\"email\" class=\"form-label\">Email</label>\r\n                <input type=\"email\" class=\"form-control\" name=\"email\" value=\"{{ $user->email }}\" required>\r\n            </div>\r\n            <div class=\"mb-3\">\r\n                <label for=\"password\" class=\"form-label\">Kata Sandi (biarkan kosong jika tidak ingin diubah)</label>\r\n                <input type=\"password\" class=\"form-control\" name=\"password\">\r\n            </div>\r\n            <div class=\"mb-3\">\r\n                <label for=\"password_confirmation\" class=\"form-label\">Konfirmasi Kata Sandi</label>\r\n                <input type=\"password\" class=\"form-control\" name=\"password_confirmation\">\r\n            </div>\r\n            <div class=\"mb-3\">\r\n                <label for=\"role\" class=\"form-label\">Peran</label>\r\n                <select class=\"form-select\" name=\"role\" required>\r\n                    <option value=\"admin\" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>\r\n                    <option value=\"mentor\" {{ $user->role == 'mentor' ? 'selected' : '' }}>Mentor</option>\r\n                    <option value=\"dosen\" {{ $user->role == 'dosen' ? 'selected' : '' }}>Dosen</option>\r\n                    <option value=\"mahasiswa\" {{ $user->role == 'mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>\r\n                </select>\r\n            </div>\r\n            <button type=\"submit\" class=\"btn btn-primary\">Simpan</button>\r\n        </form>\r\n    </div>\r\n</x-app-layouts>\r\n"
+        }
+    ]
+}
