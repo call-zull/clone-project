@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1730516604562,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730518881787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,8 +60,14 @@\n     {\n         return $this->belongsTo(Position::class);\n     }\n \n+    public function profile()\n+{\n+    return $this->hasOne(Profile::class);\n+}\n+\n+\n     // public function hasRole($role)\n     // {\n     //     return $this->role === $role;\n     // }\n"
+                },
+                {
+                    "date": 1730519700976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,11 +61,11 @@\n         return $this->belongsTo(Position::class);\n     }\n \n     public function profile()\n-{\n-    return $this->hasOne(Profile::class);\n-}\n+    {\n+        return $this->hasOne(Profile::class);\n+    }\n \n \n     // public function hasRole($role)\n     // {\n"
                 }
             ],
             "date": 1730516604562,

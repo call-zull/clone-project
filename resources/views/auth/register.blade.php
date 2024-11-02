@@ -18,10 +18,21 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">{{ __('Email Address') }}</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                            name="email" value="{{ old('email') }}">
-                        @error('email')
+                        <label for="nim" class="form-label">NIM</label>
+                        <input id="nim" type="text" class="form-control @error('nim') is-invalid @enderror"
+                            name="nim" value="{{ old('nim') }}">
+                        @error('nim')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">No HP</label>
+                        <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror"
+                            name="phone" value="{{ old('phone') }}">
+                        @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -30,22 +41,43 @@
 
                     <div class="mb-3">
                         <label for="position" class="form-label">Position</label>
-                        <div>
+                        <select id="position" name="position_id" class="form-select @error('position_id') is-invalid @enderror">
+                            <option value="">Select Position</option>
                             @foreach ($positions as $position)
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="position_id"
-                                        id="position{{ $position->id }}" value="{{ $position->id }}">
-                                    <label class="form-check-label" for="position{{ $position->id }}">
-                                        {{ $position->name }}
-                                    </label>
-                                </div>
+                                <option value="{{ $position->id }}">{{ $position->name }}</option>
                             @endforeach
-                            @error('position_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                        </select>
+                        @error('position_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="major" class="form-label">Major</label>
+                        <select id="major" name="major_id" class="form-select @error('major_id') is-invalid @enderror">
+                            <option value="">Select Major</option>
+                            @foreach ($majors as $major)
+                                <option value="{{ $major->id }}">{{ $major->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('major_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -71,7 +103,7 @@
                     </div>
 
                     <div class="mt-3 text-center">
-                        <span>Already have an account ? </span>
+                        <span>Already have an account? </span>
                         <a class="text-decoration-none" href="{{ route('login') }}">
                             login
                         </a>

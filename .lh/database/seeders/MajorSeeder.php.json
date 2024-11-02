@@ -1,0 +1,18 @@
+{
+    "sourceFile": "database/seeders/MajorSeeder.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730519499636,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730519499636,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace Database\\Seeders;\n\nuse Illuminate\\Database\\Seeder;\nuse App\\Models\\Major;\n\nclass MajorSeeder extends Seeder\n{\n    /**\n     * Run the database seeds.\n     *\n     * @return void\n     */\n    public function run()\n    {\n        $majors = [\n            'Akuntansi Bisnis Digital',\n            'Bisnis Digital',\n            'Budidaya Tanaman Perkebunan',\n            'Manajemen Pemasaran Internasional',\n            'Teknik Informatika',\n            'Teknik Otomotif',\n            'Teknik Rekayasa Multimedia',\n        ];\n\n        foreach ($majors as $majorName) {\n            Major::updateOrCreate(\n                ['name' => $majorName], // Kondisi untuk mencari data\n                ['name' => $majorName]  // Data yang akan di-update atau dibuat\n            );\n        }\n    }\n}"
+        }
+    ]
+}
