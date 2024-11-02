@@ -8,9 +8,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            Pengguna
-                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Pengguna</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +24,8 @@
                             <th style="width: 5%">#</th>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>Peran</th>
+                            <th>Role</th>
+                            <th>Posisi</th> <!-- Mengubah kolom header menjadi 'Posisi' -->
                             <th style="width: 15%">Aksi</th>
                         </tr>
                     </thead>
@@ -37,17 +36,13 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
+                                <td>{{ $user->position ? $user->position->name : 'Tidak ada' }}</td> <!-- Menampilkan nama posisi -->
                                 <td>
-                                    <a href="{{ route('users.edit', $user) }}"
-                                        class="btn btn-warning btn-sm me-1">Edit</a>
-                                    <form action="{{ route('users.destroy', $user) }}" method="POST"
-                                        style="display:inline;">
+                                    <a href="{{ route('users.edit', $user) }}" class="btn btn-warning btn-sm me-1">Edit</a>
+                                    <form action="{{ route('users.destroy', $user) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm me-1"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                            Hapus
-                                        </button>
+                                        <button type="submit" class="btn btn-danger btn-sm me-1" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">Hapus</button>
                                     </form>
                                 </td>
                             </tr>

@@ -1,0 +1,30 @@
+{
+    "sourceFile": "database/seeders/BatchSeeder.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1730513500571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730513546444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     {\n         Batch::updateOrCreate([\n             'name' => 'Batch 1',\n             'start_date' => '2024-10-01',\n-            'end_date' => '2024-11-31',\n+            'end_date' => '2024-11-30',\n         ]);\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730513574059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     {\n         Batch::updateOrCreate([\n             'name' => 'Batch 1',\n             'start_date' => '2024-10-01',\n-            'end_date' => '2024-11-30',\n+            'end_date' => '2024-11-01',\n         ]);\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730513640800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     {\n         Batch::updateOrCreate([\n             'name' => 'Batch 1',\n             'start_date' => '2024-10-01',\n-            'end_date' => '2024-11-01',\n+            'end_date' => '2024-11-30',\n         ]);\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1730513500571,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace Database\\Seeders;\n\nuse App\\Models\\Batch;\nuse Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents;\nuse Illuminate\\Database\\Seeder;\n\nclass BatchSeeder extends Seeder\n{\n    /**\n     * Run the database seeds.\n     */\n    public function run(): void\n    {\n        Batch::updateOrCreate([\n            'name' => 'Batch 1',\n            'start_date' => '2024-10-01',\n            'end_date' => '2024-11-31',\n        ]);\n    }\n}"
+        }
+    ]
+}

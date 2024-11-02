@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1730426331805,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730514815968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,26 +21,29 @@\n         return view('admin.users.create');\n     }\n \n     public function store(Request $request)\n-    {\n-        $this->validate($request, [\n-            'name' => 'required|string|max:255',\n-            'email' => 'required|string|email|max:255|unique:users',\n-            'password' => 'required|string|min:8|confirmed',\n-            'role' => 'required|string|in:admin,mentor,dosen,mahasiswa',\n-        ]);\n+{\n+    $this->validate($request, [\n+        'name' => 'required|string|max:255',\n+        'email' => 'required|string|email|max:255|unique:users',\n+        'password' => 'required|string|min:8|confirmed',\n+        'role' => 'required|string|in:mentor,dosen', // Hanya izinkan mentor dan dosen\n+        'position_id' => 'required|exists:positions,id', // Pastikan position_id valid\n+    ]);\n \n-        User::create([\n-            'name' => $request->name,\n-            'email' => $request->email,\n-            'password' => Hash::make($request->password),\n-            'role' => $request->role,\n-        ]);\n+    User::create([\n+        'name' => $request->name,\n+        'email' => $request->email,\n+        'password' => Hash::make($request->password),\n+        'role' => $request->role,\n+        'position_id' => $request->position_id, // Tambahkan posisi\n+    ]);\n \n-        return redirect()->route('users.index')->with('success', 'User berhasil dibuat.');\n-    }\n+    return redirect()->route('users.index')->with('success', 'User berhasil dibuat.');\n+}\n \n+\n     public function edit(User $user)\n     {\n         return view('admin.users.edit', compact('user'));\n     }\n@@ -69,5 +72,5 @@\n     {\n         $user->delete();\n         return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');\n     }\n-}\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730514910571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,12 +16,14 @@\n         return view('admin.users.index', compact('users'));\n     }\n \n     public function create()\n-    {\n-        return view('admin.users.create');\n-    }\n+{\n+    $positions = Position::all(); // Ambil semua posisi\n+    return view('admin.users.create', compact('positions'));\n+}\n \n+\n     public function store(Request $request)\n     {\n         $this->validate($request, [\n             'name' => 'required|string|max:255',\n"
                 }
             ],
             "date": 1730426331805,

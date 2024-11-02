@@ -14,14 +14,14 @@ class PositionSeeder extends Seeder
     public function run(): void
     {
         $position = [
-            'programmer',
-            'ui/ux designer',
-            'photo grapher',
-            'vidio editor',
+            'Programmer',
+            'UI/UX Designer',
+            'Photo Video',
+            'Graphic Designer',
         ];
 
         foreach ($position as $value) {
-            Position::create([
+            Position::updateOrCreate([
                 'name' => $value,
             ]);
         }

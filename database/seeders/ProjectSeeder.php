@@ -13,7 +13,7 @@ class ProjectSeeder extends Seeder
      */
     public function run(): void
     {
-        Project::create([
+        Project::updateOrCreate([
                 'name' => 'Sistem infomasi perpustakaan',
             ]);
     }

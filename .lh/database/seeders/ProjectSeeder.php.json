@@ -1,0 +1,18 @@
+{
+    "sourceFile": "database/seeders/ProjectSeeder.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730513334913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730513334913,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace Database\\Seeders;\n\nuse App\\Models\\Project;\nuse Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents;\nuse Illuminate\\Database\\Seeder;\n\nclass ProjectSeeder extends Seeder\n{\n    /**\n     * Run the database seeds.\n     */\n    public function run(): void\n    {\n        Project::updateOrCreate([\n                'name' => 'Sistem infomasi perpustakaan',\n            ]);\n    }\n}"
+        }
+    ]
+}

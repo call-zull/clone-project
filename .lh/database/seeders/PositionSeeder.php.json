@@ -1,0 +1,22 @@
+{
+    "sourceFile": "database/seeders/PositionSeeder.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1730513324371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730515713408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,12 +13,12 @@\n      */\n     public function run(): void\n     {\n         $position = [\n-            'programmer',\n-            'ui/ux designer',\n-            'photo grapher',\n-            'vidio editor',\n+            'Programmer',\n+            'UI/UX Designer',\n+            'Photo Video',\n+            'Graphic Designer',\n         ];\n \n         foreach ($position as $value) {\n             Position::updateOrCreate([\n"
+                }
+            ],
+            "date": 1730513324371,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace Database\\Seeders;\n\nuse App\\Models\\Position;\nuse Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents;\nuse Illuminate\\Database\\Seeder;\n\nclass PositionSeeder extends Seeder\n{\n    /**\n     * Run the database seeds.\n     */\n    public function run(): void\n    {\n        $position = [\n            'programmer',\n            'ui/ux designer',\n            'photo grapher',\n            'vidio editor',\n        ];\n\n        foreach ($position as $value) {\n            Position::updateOrCreate([\n                'name' => $value,\n            ]);\n        }\n    }\n}"
+        }
+    ]
+}

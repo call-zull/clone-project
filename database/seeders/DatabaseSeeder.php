@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,35 +12,51 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'role' => 'admin',
-        ]);
+        $users = [
+            [
+                'name' => 'Junaidi',
+                'email' => 'admin@admin.com',
+                'role' => 'admin',
+                'password' => bcrypt('password')
+            ],
+            [
+                'name' => 'Oka Rajeb Abdilah',
+                'email' => 'mentor@mentor.com',
+                'role' => 'mentor',
+                'password' => bcrypt('password')
+            ],
+            [
+                'name' => 'Bambang s.pd',
+                'email' => 'dosen@dosen.com',
+                'role' => 'dosen',
+                'password' => bcrypt('password')
+            ],
+            [
+                'name' => 'Rizki',
+                'email' => 'mahasiswa@mahasiswa.com',
+                'role' => 'mahasiswa',
+                'password' => bcrypt('password')
+            ],
+            // [
+            //     'name' => 'asep',
+            //     'email' => 'mahasiswas@mahasiswa.com',
+            //     'role' => 'mahasiswa',
+            //     'password' => bcrypt('password')
+            // ]
+        ];
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'mentor@mentor.com',
-            'role' => 'mentor',
-        ]);
-
-        User::factory()->create([
-            'name' => 'dosen',
-            'email' => 'dosen@dosen.com',
-            'role' => 'dosen',
-        ]);
-
-        User::factory()->create([
-            'name' => 'mahasiswa',
-            'email' => 'mahasiswa@mahasiswa.com',
-            'role' => 'mahasiswa',
-            'position_id' => 1
-        ]);
+        foreach ($users as $item) {
+            User::updateOrCreate(
+                ['email' => $item['email']],
+                $item
+            );
+        }
 
         $this->call([
             PositionSeeder::class,
             BatchSeeder::class,
-            ProjectSeeder::class
+            ProjectSeeder::class,
+            // MajorSeeder::class,
         ]);
     }
 }

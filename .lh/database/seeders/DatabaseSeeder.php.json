@@ -3,11 +3,35 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1730425445942,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730512587591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n             'email' => 'dosen@dosen.com',\n             'role' => 'dosen',\n         ]);\n \n-        User::factory()->create([\n+        User::updateOrCreate([\n             'name' => 'mahasiswa',\n             'email' => 'mahasiswa@mahasiswa.com',\n             'role' => 'mahasiswa',\n             'position_id' => 1\n"
+                },
+                {
+                    "date": 1730512652619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n      * Seed the application's database.\n      */\n     public function run(): void\n     {\n-        User::factory()->create([\n+        User::factory()->updateOrCreate([\n             'name' => 'admin',\n             'email' => 'admin@admin.com',\n             'role' => 'admin',\n         ]);\n"
+                },
+                {
+                    "date": 1730512664119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,19 +18,19 @@\n             'email' => 'admin@admin.com',\n             'role' => 'admin',\n         ]);\n \n-        User::factory()->create([\n-            'name' => 'Test User',\n-            'email' => 'mentor@mentor.com',\n-            'role' => 'mentor',\n-        ]);\n+        // User::factory()->create([\n+        //     'name' => 'Test User',\n+        //     'email' => 'mentor@mentor.com',\n+        //     'role' => 'mentor',\n+        // ]);\n \n-        User::factory()->create([\n-            'name' => 'dosen',\n-            'email' => 'dosen@dosen.com',\n-            'role' => 'dosen',\n-        ]);\n+        // User::factory()->create([\n+        //     'name' => 'dosen',\n+        //     'email' => 'dosen@dosen.com',\n+        //     'role' => 'dosen',\n+        // ]);\n \n         User::updateOrCreate([\n             'name' => 'mahasiswa',\n             'email' => 'mahasiswa@mahasiswa.com',\n"
+                },
+                {
+                    "date": 1730512704953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,13 +12,13 @@\n      * Seed the application's database.\n      */\n     public function run(): void\n     {\n-        User::factory()->updateOrCreate([\n-            'name' => 'admin',\n-            'email' => 'admin@admin.com',\n-            'role' => 'admin',\n-        ]);\n+        // User::factory()->updateOrCreate([\n+        //     'name' => 'admin',\n+        //     'email' => 'admin@admin.com',\n+        //     'role' => 'admin',\n+        // ]);\n \n         // User::factory()->create([\n         //     'name' => 'Test User',\n         //     'email' => 'mentor@mentor.com',\n"
+                },
+                {
+                    "date": 1730512733999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,11 +37,11 @@\n             'role' => 'mahasiswa',\n             'position_id' => 1\n         ]);\n \n-        $this->call([\n-            PositionSeeder::class,\n-            BatchSeeder::class,\n-            ProjectSeeder::class\n-        ]);\n+        // $this->call([\n+        //     PositionSeeder::class,\n+        //     BatchSeeder::class,\n+        //     ProjectSeeder::class\n+        // ]);\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1730512747133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,11 +37,11 @@\n             'role' => 'mahasiswa',\n             'position_id' => 1\n         ]);\n \n-        // $this->call([\n-        //     PositionSeeder::class,\n-        //     BatchSeeder::class,\n-        //     ProjectSeeder::class\n-        // ]);\n+        $this->call([\n+            PositionSeeder::class,\n+            BatchSeeder::class,\n+            ProjectSeeder::class\n+        ]);\n     }\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1730425445942,

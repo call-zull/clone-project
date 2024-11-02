@@ -49,18 +49,18 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Kata Sandi</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                <input type="password" class="form-control"
                                     name="password">
-                                @error('password')
+                                {{-- @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                                @enderror
+                                @enderror --}}
                             </div>
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
                                 <input type="password" class="form-control" name="password_confirmation">
-                            </div>
+                            </div> --}}
                             <div class="mb-3">
                                 <label for="role" class="form-label">Peran</label>
                                 <select name="role" class="form-select @error('role') is-invalid @enderror">
@@ -76,6 +76,21 @@
                                     </div>
                                 @enderror
                             </div>
+                            <div class="mb-3">
+                                <label for="position_id" class="form-label">Posisi</label>
+                                <select name="position_id" class="form-select @error('position_id') is-invalid @enderror">
+                                    @foreach ($positions as $position)
+                                        <option value="{{ $position->id }}">
+                                            {{ $position->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('position_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>                            
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary w-100">Simpan</button>
                             </div>

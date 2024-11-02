@@ -13,10 +13,10 @@ class BatchSeeder extends Seeder
      */
     public function run(): void
     {
-        Batch::create([
+        Batch::updateOrCreate([
             'name' => 'Batch 1',
             'start_date' => '2024-10-01',
-            'end_date' => '2024-11-31',
+            'end_date' => '2024-11-30',
         ]);
     }
 }

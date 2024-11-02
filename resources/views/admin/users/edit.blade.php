@@ -9,9 +9,7 @@
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Pengguna</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            Edit
-                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </div>
             </div>
@@ -30,36 +28,37 @@
                             @method('PUT')
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama</label>
-                                <input type="text" class="form-control" name="name" value="{{ $user->name }}"
-                                    required>
+                                <input type="text" class="form-control" name="name" value="{{ $user->name }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" name="email" value="{{ $user->email }}"
-                                    required>
+                                <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Kata Sandi (biarkan kosong jika tidak ingin
-                                    diubah)</label>
+                                <label for="password" class="form-label">Kata Sandi (biarkan kosong jika tidak ingin diubah)</label>
                                 <input type="password" class="form-control" name="password">
-                            </div>
-                            <div class="mb-3">
-                                <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
-                                <input type="password" class="form-control" name="password_confirmation">
                             </div>
                             <div class="mb-3">
                                 <label for="role" class="form-label">Peran</label>
                                 <select name="role" class="form-select @error('role') is-invalid @enderror">
-                                    @foreach (\App\Enums\RoleEnum::asSelectArray() as $key => $enum)
-                                        <option value="{{ $key }}" {{ $user->role == $key ? 'selected' : '' }}>
-                                            {{ $enum }}
+                                    <option value="mentor" {{ $user->role == 'mentor' ? 'selected' : '' }}>Mentor</option>
+                                    <option value="dosen" {{ $user->role == 'dosen' ? 'selected' : '' }}>Dosen</option>
+                                </select>
+                                @error('role')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="position_id" class="form-label">Posisi</label>
+                                <select name="position_id" class="form-select @error('position_id') is-invalid @enderror">
+                                    @foreach ($positions as $position)
+                                        <option value="{{ $position->id }}" {{ $user->position_id == $position->id ? 'selected' : '' }}>
+                                            {{ $position->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('role')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                @error('position_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">

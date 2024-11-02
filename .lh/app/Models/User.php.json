@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Models/User.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1730516604562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1730516604562,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\n// use Illuminate\\Contracts\\Auth\\MustVerifyEmail;\n\nuse App\\Enums\\RoleEnum;\nuse Illuminate\\Database\\Eloquent\\Casts\\Attribute;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\nuse Illuminate\\Notifications\\Notifiable;\n\nclass User extends Authenticatable\n{\n    /** @use HasFactory<\\Database\\Factories\\UserFactory> */\n    use HasFactory, Notifiable;\n\n    /**\n     * The attributes that are mass assignable.\n     *\n     * @var array<int, string>\n     */\n    protected $fillable = [\n        'name',\n        'email',\n        'password',\n        'role',\n        'position_id',\n    ];\n\n    /**\n     * The attributes that should be hidden for serialization.\n     *\n     * @var array<int, string>\n     */\n    protected $hidden = [\n        'password',\n        'remember_token',\n    ];\n\n    /**\n     * Get the attributes that should be cast.\n     *\n     * @return array<string, string>\n     */\n    protected function casts(): array\n    {\n        return [\n            'email_verified_at' => 'datetime',\n            'password' => 'hashed',\n        ];\n    }\n\n    public function roleDescription(): Attribute\n    {\n        return Attribute::make(fn() => $this->role ? RoleEnum::getDescription((int) $this->role) : null);\n    }\n\n    public function position()\n    {\n        return $this->belongsTo(Position::class);\n    }\n\n    // public function hasRole($role)\n    // {\n    //     return $this->role === $role;\n    // }\n\n}"
+        }
+    ]
+}
