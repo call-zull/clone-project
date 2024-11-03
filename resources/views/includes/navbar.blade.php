@@ -36,7 +36,7 @@
 
                 @if (in_array(Auth::user()->role, ['admin', 'dosen', 'mentor']))
                     <li class="nav-item">
-                        <a href="{{ route('admin.bacth.index') }}" class="nav-link">
+                        <a href="{{ route('bacth.index') }}" class="nav-link">
                             <i class="nav-icon bi bi-palette"></i>
                             <p>Batch</p>
                         </a>

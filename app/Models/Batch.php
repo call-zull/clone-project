@@ -11,4 +11,9 @@ class Batch extends Model
         'start_date',
         'end_date',
     ];
+
+    public function learningOutcomes()
+    {
+        return $this->hasMany(LearningOutComes::class);
+    }
 }
