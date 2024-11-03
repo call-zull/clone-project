@@ -36,7 +36,12 @@
                                     <th style="width: 5%">#</th>
                                     <th>code</th>
                                     <th>Name</th>
-                                    <th style="width: 18%">Actions</th>
+                                    @if (auth()->user()->role == 'admin')
+                                        <th style="width: 18%">Actions</th>
+                                    @else
+                                        <th style="width: 10%">Actions</th>
+                                    @endif
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,18 +52,20 @@
                                         <td>{{ $learningOutcome->name }}</td>
                                         <td>
                                             <a href="" class="btn btn-info btn-sm me-1">Deatil</a>
-                                            <a href="{{ route('learning-outcomes.edit', [$learningOutcome->id, 'batch' => $batch, 'position' => $position]) }}"
-                                                class="btn btn-warning btn-sm me-1">Edit</a>
-                                            <form
-                                                action="{{ route('learning-outcomes.destroy', $learningOutcome->id) }}"
-                                                method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm me-1"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                                    Hapus
-                                                </button>
-                                            </form>
+                                            @if (auth()->user()->role == 'admin')
+                                                <a href="{{ route('learning-outcomes.edit', [$learningOutcome->id, 'batch' => $batch, 'position' => $position]) }}"
+                                                    class="btn btn-warning btn-sm me-1">Edit</a>
+                                                <form
+                                                    action="{{ route('learning-outcomes.destroy', $learningOutcome->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm me-1"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                                        Hapus
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @empty
