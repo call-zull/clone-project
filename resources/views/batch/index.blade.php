@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Batch
                         </li>
@@ -40,7 +40,7 @@
                                 <td>{{ $batch->end_date }}</td>
                                 {{-- <td>100</td> --}}
                                 <td>
-                                    <a href="" class="btn btn-info btn-sm me-1">View</a>
+                                    <a href="{{ route('bacth.cpl.index', $batch->id) }}" class="btn btn-info btn-sm me-1">CPL</a>
 
                                 </td>
                             </tr>

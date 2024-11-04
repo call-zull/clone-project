@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BatchController as AdminBatchController;
+use App\Http\Controllers\Admin\LearningOutComeController;
+use App\Http\Controllers\Admin\PositionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +17,16 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     })->name('admin.dashboard');
-    
+
     Route::resource('admin/users', UserController::class);
+    Route::resource('batch/{batch}/position', PositionController::class);
+    Route::resource('learning-outcomes', LearningOutComeController::class);
+    Route::get('/learning-outcomes/batch/{batch}/position/{position}/create', [LearningOutComeController::class, 'create'])->name('learning-outcomes.create');
+    Route::post('/learning-outcomes/batch/{batch}/position/{position}/store', [LearningOutComeController::class, 'store'])->name('learning-outcomes.store');
+    Route::get('/learning-outcomes/batch/{batch}/position/{position}/edit/{learning_outcome}', [LearningOutComeController::class, 'edit'])->name('learning-outcomes.edit');
+    Route::put('/learning-outcomes/batch/{batch}/position/{position}/{learning_outcome}', [LearningOutComeController::class, 'update'])->name('learning-outcomes.update');
 });
+
 
 Route::prefix('mentor')->middleware(['auth', 'role:mentor'])->group(function () {
     Route::get('/', function () {
@@ -37,6 +46,8 @@ Route::prefix('mahasiswa')->middleware(['auth', 'role:mahasiswa'])->group(functi
     })->name('mahasiswa.dashboard');
 });
 
-Route::prefix('batch')->middleware(['auth', 'role:admin,mentor,dosen'])->group(function () {
-    route::get('/bacth', [AdminBatchController::class, 'index'])->name('admin.bacth.index');
+Route::prefix('admin')->middleware(['auth', 'role:admin,mentor,dosen'])->group(function () {
+    route::get('/batch', [AdminBatchController::class, 'index'])->name('bacth.index');
+    route::get('/batch/batch-{batch}/learning-outcomes', [LearningOutComeController::class, 'index'])->name('bacth.cpl.index');
+    route::get('/batch/batch-{batch}/learning-outcomes/position-{position}', [LearningOutComeController::class, 'show'])->name('bacth.cpl.show');
 });
