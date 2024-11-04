@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             PositionSeeder::class,
             BatchSeeder::class,
             ProjectSeeder::class,
-            // MajorSeeder::class,
+            MajorSeeder::class,
         ]);
     }
 }

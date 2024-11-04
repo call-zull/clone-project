@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -49,34 +50,44 @@ class RegisterController extends Controller
      */
 
      public function showRegistrationForm()
-     {
+    {
         $positions = Position::all();
-        return view('auth.register', compact('positions'));
-     }
+        $majors = Major::all(); // Ambil semua jurusan
+        return view('auth.register', compact('positions', 'majors')); // Kirim posisi dan jurusan ke view
+    }
+
 
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'nim' => ['required', 'string', 'max:20'],
+            'phone' => ['required', 'string', 'max:15'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'position_id' => ['required', 'integer'],
+            'major_id' => ['required', 'integer'], // Validasi untuk major
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'position_id' => $data['position_id'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // Membuat profil terkait dengan pengguna
+        $user->profile()->create([
+            'nim' => $data['nim'],
+            'phone' => $data['phone'],
+            'major_id' => $data['major_id'], // Menyimpan id major
+        ]);
+
+        return $user;
     }
+
+
 }
