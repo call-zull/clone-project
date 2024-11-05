@@ -28,7 +28,7 @@
                                                     <option value="">Category 3</option>
                                                 </select>
 
-                                                {{-- <button type="submit" class="btn btn-primary">Filter</button> --}}
+                                                <button type="submit" class="btn btn-primary">Filter</button>
                                             </form>
                                         </div>
                                     </div>
@@ -58,12 +58,44 @@
                                                         <td>my dospem</td>
                                                         <td>revision</td>
                                                         <td>
-                                                            <a href="">revisi</a>
-                                                            <a href="">setuju</a>
+                                                            <button class="btn btn-secondary text-nowrap ms-3"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#revisiModal">Revisi</button>
+                                                            <a href="" class="btn btn-success">Approve</a>
                                                         </td>
+                                                        <div class="modal fade" id="revisiModal" tabindex="-1"
+                                                            aria-labelledby="revisiModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="revisiModalLabel">
+                                                                            Add Revisi</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="" method="POST">
+                                                                            @csrf
+                                                                            <div class="mb-3">
+                                                                                <label for="activityCategories"
+                                                                                    class="form-label">Revisi</label>
+                                                                                <textarea class="form-control" id="activityCategories" name="activity_categories" cols="30" rows="5"
+                                                                                    required></textarea>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit" class="btn btn-primary w-100">Send
+                                                                                    Revisi</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </tr>
                                                 </tbody>
                                             </table>
+
                                         </div>
                                     </div>
 
