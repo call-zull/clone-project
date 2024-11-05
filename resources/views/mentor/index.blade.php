@@ -42,6 +42,7 @@
                                                         <th>Cpl</th>
                                                         <th>Project</th>
                                                         <th>Task</th>
+                                                        <th>Checked By: (mentor)</th>
                                                         <th>Checked By: (dospem)</th>
                                                         <th>Revision</th>
                                                         <th style="width: 40px">Status</th>
@@ -53,6 +54,7 @@
                                                         <td>Update software</td>
                                                         <td>cpl 1</td>
                                                         <td>ngopi</td>
+                                                        <td>mentor</td>
                                                         <td>my dospem</td>
                                                         <td>revision</td>
                                                         <td>

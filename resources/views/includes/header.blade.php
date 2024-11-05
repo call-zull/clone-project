@@ -15,23 +15,24 @@
 
                 <li class="nav-item d-none d-md-block ms-3">
                     <form action="" method="get" class="d-flex">
-                        <input type="text" name="search" id="" placeholder="Search..."
-                            class="form-control me-2" aria-label="Search">
-                        <button class="btn btn-outline-secondary" type="submit" aria-label="Search">
-                            <i class="bi bi-search"></i>
-                        </button>
+                        <div class="input-group">
+                            <span class="input-group-text" id="search-icon">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search-icon">
+                        </div>
                     </form>
                 </li>
             </ul>
         @endif
 
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="#" data-lte-toggle="fullscreen" aria-label="Toggle Fullscreen">
                     <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
                     <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none;"></i>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
