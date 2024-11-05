@@ -4,6 +4,7 @@
 <head>
     @include('includes.meta')
     @include('includes.styles')
+    @stack('styles')
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -18,6 +19,7 @@
         </main>
         @include('includes.script')
     </div>
+    @stack('scripts')
 </body>
 
 </html>
