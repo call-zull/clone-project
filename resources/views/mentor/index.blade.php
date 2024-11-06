@@ -112,10 +112,10 @@
                                                                             <div class="mb-3">
                                                                                 <label for="activityCategories"
                                                                                     class="form-label">CPL</label>
-                                                                                <select class="form-select"
-                                                                                    id="activityCategories"
-                                                                                    name="" multiple="multiple">
-                                                                                    <option value="Category 1">cpl 1
+                                                                                <select class="js-example-basic-multiple"
+                                                                                name="states[]" multiple="multiple"
+                                                                                >
+                                                                                    <option value="Category1">cpl 1
                                                                                     </option>
                                                                                     <option value="Category 2">cpl 2
                                                                                     </option>
@@ -161,4 +161,13 @@
             </div>
         </div>
     @endif
+
+    <script>
+        $(document).ready(function() {
+            // Inisialisasi Select2 pada modal setelah modal ditampilkan
+            $('#approveModal').on('shown.bs.modal', function () {
+                $('.js-example-basic-multiple').select2();
+            });
+        });
+    </script>
 </x-app-layouts>
