@@ -50,7 +50,7 @@
                                                         <th style="width: 40px">Status</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="text-nowrap">
                                                     <tr class="align-middle">
                                                         <td>30 October 2024 - 09:53</td>
                                                         <td>Update software</td>
