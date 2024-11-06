@@ -44,8 +44,8 @@
                                                         <th>Task</th>
                                                         <th>Checked By: (mentor)</th>
                                                         <th>Checked By: (dospem)</th>
-                                                        <th>Revision</th>
-                                                        <th style="width: 40px">Status</th>
+                                                        <th>Status</th>
+                                                        <th style="width: 40px">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="text-nowrap">
@@ -61,7 +61,9 @@
                                                             <button class="btn btn-secondary text-nowrap ms-3"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#revisiModal">Revisi</button>
-                                                            <a href="" class="btn btn-success">Approve</a>
+                                                            <button class="btn btn-success text-nowrap ms-3"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#approveModal">Approve</button>
                                                         </td>
                                                         <div class="modal fade" id="revisiModal" tabindex="-1"
                                                             aria-labelledby="revisiModalLabel" aria-hidden="true">
@@ -80,11 +82,13 @@
                                                                             <div class="mb-3">
                                                                                 <label for="activityCategories"
                                                                                     class="form-label">Revisi</label>
+
                                                                                 <textarea class="form-control" id="activityCategories" name="activity_categories" cols="30" rows="5"
                                                                                     required></textarea>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="submit" class="btn btn-primary w-100">Send
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary w-100">Send
                                                                                     Revisi</button>
                                                                             </div>
                                                                         </form>
@@ -92,6 +96,45 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="modal fade" id="approveModal" tabindex="-1"
+                                                            aria-labelledby="revisiModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="" method="POST">
+                                                                            @csrf
+                                                                            <div class="mb-3">
+                                                                                <label for="activityCategories"
+                                                                                    class="form-label">CPL</label>
+                                                                                <select class="form-select"
+                                                                                    id="activityCategories"
+                                                                                    name="" multiple="multiple">
+                                                                                    <option value="Category 1">cpl 1
+                                                                                    </option>
+                                                                                    <option value="Category 2">cpl 2
+                                                                                    </option>
+                                                                                    <option value="Category 3">cpl 3
+                                                                                    </option>
+                                                                                    <option value="Category 4">cpl 4
+                                                                                    </option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary w-100">aprove</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -101,11 +144,13 @@
 
                                     <div class="clearfix card-footer">
                                         <ul class="m-0 pagination pagination-sm justify-content-center">
-                                            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">&laquo;</a>
+                                            </li>
                                             <li class="page-item"><a class="page-link" href="#">1</a></li>
                                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                                             <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">&raquo;</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
