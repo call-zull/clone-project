@@ -16,10 +16,10 @@
                 <li class="nav-item d-none d-md-block ms-3">
                     <form action="" method="get" class="d-flex">
                         <div class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search-icon">
                             <span class="input-group-text" id="search-icon">
                                 <i class="bi bi-search"></i>
                             </span>
-                            <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search-icon">
                         </div>
                     </form>
                 </li>
