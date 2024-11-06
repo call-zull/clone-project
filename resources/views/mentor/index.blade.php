@@ -65,80 +65,9 @@
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#approveModal">Approve</button>
                                                         </td>
-                                                        <div class="modal fade" id="revisiModal" tabindex="-1"
-                                                            aria-labelledby="revisiModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="revisiModalLabel">
-                                                                            Add Revisi</h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form action="" method="POST">
-                                                                            @csrf
-                                                                            <div class="mb-3">
-                                                                                <label for="activityCategories"
-                                                                                    class="form-label">Revisi</label>
-
-                                                                                <textarea class="form-control" id="activityCategories" name="activity_categories" cols="30" rows="5"
-                                                                                    required></textarea>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary w-100">Send
-                                                                                    Revisi</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal fade" id="approveModal" tabindex="-1"
-                                                            aria-labelledby="revisiModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form action="" method="POST">
-                                                                            @csrf
-                                                                            <div class="mb-3">
-                                                                                <label for="activityCategories"
-                                                                                    class="form-label">CPL</label>
-                                                                                <select class="js-example-basic-multiple"
-                                                                                name="states[]" multiple="multiple"
-                                                                                >
-                                                                                    <option value="Category1">cpl 1
-                                                                                    </option>
-                                                                                    <option value="Category 2">cpl 2
-                                                                                    </option>
-                                                                                    <option value="Category 3">cpl 3
-                                                                                    </option>
-                                                                                    <option value="Category 4">cpl 4
-                                                                                    </option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary w-100">aprove</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                     </tr>
                                                 </tbody>
                                             </table>
-
                                         </div>
                                     </div>
 
@@ -162,12 +91,64 @@
         </div>
     @endif
 
+    <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="revisiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="revisiModalLabel">Add Revisi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="activityCategories" class="form-label">Revisi</label>
+                            <textarea class="form-control" id="activityCategories" name="activity_categories" cols="30" rows="5" required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary w-100">Send Revisi</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="activityCategories" class="form-label">CPL</label>
+                            <select class="js-example-basic-multiple form-select" name="states[]" id="cpl" multiple="multiple" style="width: 100%;">
+                                <option value="Category 1">cpl 1</option>
+                                <option value="Category 2">cpl 2</option>
+                                <option value="Category 3">cpl 3</option>
+                                <option value="Category 4">cpl 4</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary w-100">Approve</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function() {
-            // Inisialisasi Select2 pada modal setelah modal ditampilkan
             $('#approveModal').on('shown.bs.modal', function () {
-                $('.js-example-basic-multiple').select2();
+                $('#cpl').select2({
+                    dropdownParent: $('#approveModal') 
+                });
             });
+
         });
     </script>
 </x-app-layouts>
