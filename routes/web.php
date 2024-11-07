@@ -49,6 +49,7 @@ Route::prefix('mahasiswa')->middleware(['auth', 'role:mahasiswa'])->group(functi
 
     Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.dashboard');
     Route::post('activity/report/store', [MahasiswaController::class, 'storeActivityReport'])->name('activity.report.store');
+    Route::put('activity/report/update{report}', [MahasiswaController::class, 'updateActivityReport'])->name('activity.report.update');
 });
 
 Route::prefix('admin')->middleware(['auth', 'role:admin,mentor,dosen'])->group(function () {

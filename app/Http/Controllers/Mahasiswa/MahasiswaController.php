@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ActivityRequest;
 use App\Models\Project;
 use App\Models\Report;
 use Illuminate\Http\Request;
@@ -13,27 +14,32 @@ class MahasiswaController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $activity = Report::with('checker', 'project')->where('user_id', $user->id)
-            ->orderBy('id', 'desc')
+        $activities = Report::with('checker', 'project')->where('user_id', $user->id)
+            ->orderBy('report_date', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
         $projects = Project::all();
-        return view('mahasiswa.index', compact('activity', 'projects'));
+        return view('mahasiswa.index', compact('activities', 'projects'));
     }
 
-    public function storeActivityReport(Request $request)
+    public function storeActivityReport(ActivityRequest $request)
     {
-        // $request->all();
-        $request->validate([
-            'batch_id' => 'required',
-            'user_id' => 'required',
-            'position_id' => 'required',
-            'project_id' => 'required',
-            'report_date' => 'required',
-            'activity' => 'required',
-        ]);
-
-        Report::create($request->all());
+        $validated = $request->validated();
+        $validated['user_id'] = auth()->user()->id;
+        $validated['batch_id'] = auth()->user()->batchUsers->batch_id;
+        $validated['position_id'] = auth()->user()->position_id;
+        $validated['project_id'] = $request->project_id;
+        Report::create($validated);
 
         return redirect()->back()->with('success', 'Laporan Aktivitas Berhasil Ditambahkan');
+    }
+
+    public function updateActivityReport(Request $request, Report $report)
+    {
+        $validated = $request->validate([
+            'activity' => 'required|string',
+        ]);
+        $report->update($validated);
+        return redirect()->back()->with('success', 'Laporan Aktivitas Berhasil Diubah');
     }
 }
