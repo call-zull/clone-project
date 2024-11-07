@@ -31,18 +31,12 @@ class DatabaseSeeder extends Seeder
                 'role' => 'dosen',
                 'password' => bcrypt('password')
             ],
-            [
-                'name' => 'Rizki',
-                'email' => 'mahasiswa@mahasiswa.com',
-                'role' => 'mahasiswa',
-                'password' => bcrypt('password')
-            ],
             // [
-            //     'name' => 'asep',
-            //     'email' => 'mahasiswas@mahasiswa.com',
+            //     'name' => 'Rizki',
+            //     'email' => 'mahasiswa@mahasiswa.com',
             //     'role' => 'mahasiswa',
             //     'password' => bcrypt('password')
-            // ]
+            // ],
         ];
 
         foreach ($users as $item) {

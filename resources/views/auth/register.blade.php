@@ -51,7 +51,10 @@
                                 class="form-select @error('position_id') is-invalid @enderror">
                                 <option value="">Select Position</option>
                                 @foreach ($positions as $position)
-                                    <option value="{{ $position->id }}">{{ $position->name }}</option>
+                                    <option value="{{ $position->id }}"
+                                        {{ old('position_id') == $position->id ? 'selected' : '' }}>
+                                        {{ $position->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('position_id')
@@ -67,7 +70,10 @@
                                 class="form-select @error('major_id') is-invalid @enderror">
                                 <option value="">Select Major</option>
                                 @foreach ($majors as $major)
-                                    <option value="{{ $major->id }}">{{ $major->name }}</option>
+                                    <option value="{{ $major->id }}"
+                                        {{ old('major_id') == $major->id ? 'selected' : '' }}>
+                                        {{ $major->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('major_id')
@@ -77,6 +83,24 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="batch" class="form-label">Batch</label>
+                            <select id="batch" name="batch_id"
+                                class="form-select @error('batch_id') is-invalid @enderror">
+                                <option value="">Select Batch</option>
+                                @foreach ($batches as $batch)
+                                    <option value="{{ $batch->id }}"
+                                        {{ old('batch_id') == $batch->id ? 'selected' : '' }}>
+                                        {{ $batch->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('batch_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">{{ __('Email Address') }}</label>
                             <input id="email" type="email"
