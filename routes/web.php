@@ -42,10 +42,12 @@ Route::prefix('dosen')->middleware(['auth', 'role:dosen'])->group(function () {
 });
 
 Route::prefix('mahasiswa')->middleware(['auth', 'role:mahasiswa'])->group(function () {
-    Route::get('/', function () {
-        return view('mahasiswa.index');
-    })->name('mahasiswa.dashboard');
 
+    // Route::get('/', function () {
+    //     return view('mahasiswa.index');
+    // })->name('mahasiswa.dashboard');
+
+    Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.dashboard');
     Route::post('activity/report/store', [MahasiswaController::class, 'storeActivityReport'])->name('activity.report.store');
 });
 

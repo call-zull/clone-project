@@ -23,4 +23,9 @@ class Report extends Model
     {
         return $this->belongsTo(Batch::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

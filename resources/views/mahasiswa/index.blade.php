@@ -63,9 +63,12 @@
                                                     onsubmit="return validateContent()">
                                                     @csrf
 
-                                                    {{ Auth::user()->batchUsers->id }}
+                                                    {{-- {{ Auth::user()->batchUsers->batch_id }}
+                                                    {{ Auth::user()->id }}
+                                                    {{ Auth::user()->position_id }} --}}
 
-                                                    <input type="hidden" name="batch_id" value="{{ Auth::user()->batchUsers->id }}">
+                                                    <input type="hidden" name="batch_id"
+                                                        value="{{ Auth::user()->batchUsers->batch_id }}">
                                                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                     <input type="hidden" name="position_id"
                                                         value="{{ Auth::user()->position_id }}">
@@ -84,8 +87,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="project_id" class="form-label">Projek</label>
-                                                        <select class="form-select" id="project_id"
-                                                            name="project_id">
+                                                        <select class="form-select" id="project_id" name="project_id">
                                                             <option value="1">Projek 1</option>
                                                             <option value="2">Projek 2</option>
                                                             <option value="3">Projek 3</option>
@@ -97,8 +99,7 @@
                                                         <div class="p-2 my-2 border">
                                                             <label for="activity">Activity</label>
                                                             <div id="editor-container"></div>
-                                                            <input type="hidden" name="activity"
-                                                                id="editor-content">
+                                                            <input type="hidden" name="activity" id="editor-content">
                                                             <div id="word-count-error" class="mt-2 text-danger">
                                                                 <span>
                                                                     The activity must contain at least 10 words.
@@ -131,32 +132,48 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="align-middle">
-                                                        <td>30 October 2024 - 09:53</td>
-                                                        <td>Update software</td>
-                                                        <td>cpl 1</td>
-                                                        <td>ngopi</td>
-                                                        <td>mentor</td>
-                                                        <td>revision</td>
-                                                        <td>
-                                                            <button class="btn btn-success text-nowrap"
-                                                                style="cursor: default">approve</button>
-                                                        </td>
-                                                    </tr>
+                                                    @forelse ($activity as $activity)
+                                                        <tr class="align-middle">
+                                                            <td>{{ $activity->report_date }}</td>
+                                                            <td>{{ $activity->cpl ? $activity->cpl->name : '-' }}</td>
+                                                            {{-- ganti nanti projek id ini dengan nama relation modelnya --}}
+                                                            <td>{{ $activity->project_id ? $activity->project_id : '-' }}
+                                                            </td>
+                                                            <td>{!! $activity->activity !!}</td>
+                                                            <td>{{ $activity->user->name }}</td>
+                                                            <td>
+                                                                @if ($activity->status == '' || $activity->status == 1)
+                                                                    Pending
+                                                                @elseif ($activity->status == 2)
+                                                                    Revisi
+                                                                @elseif ($activity->status == 3)
+                                                                    Approved
+                                                                @else
+                                                                @endif
+                                                            </td>
 
-                                                    <tr class="align-middle">
-                                                        <td>30 October 2024 - 09:53</td>
-                                                        <td>Update software</td>
-                                                        <td>cpl 1</td>
-                                                        <td>ngopi</td>
-                                                        <td>mentor</td>
-                                                        <td>revision</td>
-                                                        <td>
-                                                            <button class="btn btn-danger text-nowrap"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#revisiModal">Revisi</button>
-                                                        </td>
-                                                    </tr>
+                                                            <td>
+                                                                @if ($activity->status == '' || $activity->status == 1)
+                                                                    <button class="btn btn-warning text-nowrap"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#revisiModal">edit</button>
+                                                                @elseif ($activity->status == 2)
+                                                                    <button class="btn btn-danger text-nowrap"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#revisiModal">Revisi</button>
+                                                                @elseif ($activity->status == 3)
+                                                                    <button class="btn btn-success text-nowrap"
+                                                                        style="cursor: default">approve</button>
+                                                                @else
+                                                                    Unknown
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td colspan="7" class="text-center">No data found.</td>
+                                                        </tr>
+                                                    @endforelse
                                                 </tbody>
                                             </table>
                                         </div>
@@ -303,7 +320,7 @@
                 const content = quill.getText().trim();
                 const wordCount = content.split(/\s+/).length;
 
-                if (wordCount < 2) {
+                if (wordCount < 0) {
                     document.getElementById('word-count-error').style.display = 'block';
                     return false;
                 } else {

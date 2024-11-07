@@ -8,14 +8,26 @@ use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
 {
+
+    public function index()
+    {
+        $user = auth()->user();
+        $activity = Report::where('user_id', $user->id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('mahasiswa.index', compact('activity'));
+    }
+
     public function storeActivityReport(Request $request)
     {
-        // return $request->all();
-        $request->all([
+        // $request->all();
+        $request->validate([
             'batch_id' => 'required',
             'user_id' => 'required',
             'position_id' => 'required',
             'project_id' => 'required',
+            'report_date' => 'required',
             'activity' => 'required',
         ]);
 
