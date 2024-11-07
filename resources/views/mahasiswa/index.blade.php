@@ -1,6 +1,6 @@
 <x-app-layouts>
     @if (Auth::user()->role == 'mahasiswa')
-        <div class="container-fluid px-0">
+        <div class="px-0 container-fluid">
             <div class="py-sm-0 py-md-4" style="background-color: #f2f2f2;">
                 <div class="app-content-header">
                     <div class="" style="background-color: #ffffff; border-radius: 10px;">
@@ -10,10 +10,12 @@
                                     <div class="card-body">
                                         <div class="p-3 rounded-sm d-flex flex-column flex-sm-row justify-content-between align-items-center"
                                             style="background-color: #D9D9D9; border-radius: 10px;">
-                                            <span class="m-0 col-12 col-sm-5 card-title fw-bold text-dark fs-4">Log Activity</span>
-                                            <div class="d-flex flex-column flex-sm-row align-items-center mt-3 mt-sm-0 w-100 w-sm-auto">
+                                            <span class="m-0 col-12 col-sm-5 card-title fw-bold text-dark fs-4">Log
+                                                Activity</span>
+                                            <div
+                                                class="mt-3 d-flex flex-column flex-sm-row align-items-center mt-sm-0 w-100 w-sm-auto">
                                                 <!-- Dropdown Filter (Baris Kedua pada Mobile) -->
-                                                <div class="d-flex w-100 w-sm-auto mb-3 mb-sm-0">
+                                                <div class="mb-3 d-flex w-100 w-sm-auto mb-sm-0">
                                                     <form action="" method="GET" class="d-flex w-100">
                                                         <select name="" id="" class="form-select me-2">
                                                             <option value="">2024</option>
@@ -36,7 +38,8 @@
                                                 <!-- Add Activity Button (Mobile and Desktop) -->
                                                 <div class="w-100 w-sm-auto text-end">
                                                     <button class="btn btn-primary text-nowrap" data-bs-toggle="modal"
-                                                            data-bs-target="#addActivityModal" style="background-color: #2820FD;">
+                                                        data-bs-target="#addActivityModal"
+                                                        style="background-color: #2820FD;">
                                                         Add Activity
                                                     </button>
                                                 </div>
@@ -46,33 +49,65 @@
                                 </div>
 
                                 <!-- Modal Add Activity -->
-                                <div class="modal fade" id="addActivityModal" tabindex="-1" aria-labelledby="addActivityModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="addActivityModal" tabindex="-1"
+                                    aria-labelledby="addActivityModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="addActivityModalLabel">Add Log Activity</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="#" method="POST">
+                                                <form action="{{ route('activity.report.store') }}" method="POST"
+                                                    onsubmit="return validateContent()">
                                                     @csrf
+
+                                                    {{ Auth::user()->batchUsers->id }}
+
+                                                    <input type="hidden" name="batch_id" value="{{ Auth::user()->batchUsers->id }}">
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                    <input type="hidden" name="position_id"
+                                                        value="{{ Auth::user()->position_id }}">
+
+                                                    {{-- jika login sebagai dosen / mentor --}}
+                                                    {{-- <input type="hidden" name="status" value="1"> --}}
+                                                    {{-- ini nanri berdasarkan role yg login --}}
+                                                    {{-- <input type="hidden" name="cheked_by" value="1"> --}}
+                                                    {{-- jika login sebagai dosen / mentor --}}
+                                                    {{-- <input type="hidden" name="rejected_reason" value="kurang rapi"> --}}
+
                                                     <div class="mb-3">
                                                         <span><i class=""></i></span>
-                                                        <input type="date" class="form-control" id="activityDate" name="activity_date" readonly>
+                                                        <input type="date" class="form-control" id="report_date"
+                                                            name="report_date" readonly>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="activityCategory" class="form-label">Projek</label>
-                                                        <select class="form-select" id="activityCategory" name="activity_category">
-                                                            <option value="Category 1">Projek 1</option>
-                                                            <option value="Category 2">Projek 2</option>
-                                                            <option value="Category 3">Projek 3</option>
+                                                        <label for="project_id" class="form-label">Projek</label>
+                                                        <select class="form-select" id="project_id"
+                                                            name="project_id">
+                                                            <option value="1">Projek 1</option>
+                                                            <option value="2">Projek 2</option>
+                                                            <option value="3">Projek 3</option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="activityDescription" class="form-label">Aktivitas Hari Ini</label>
-                                                        <textarea class="form-control" id="activityDescription" name="activity_description" rows="3" required></textarea>
+                                                        <label for="activityDescription" class="form-label">Aktivitas
+                                                            Hari Ini</label>
+                                                        <div class="p-2 my-2 border">
+                                                            <label for="activity">Activity</label>
+                                                            <div id="editor-container"></div>
+                                                            <input type="hidden" name="activity"
+                                                                id="editor-content">
+                                                            <div id="word-count-error" class="mt-2 text-danger">
+                                                                <span>
+                                                                    The activity must contain at least 10 words.
+                                                                </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary w-100">Save Activity</button>
+                                                    <button type="submit" class="btn btn-primary w-100">Save
+                                                        Activity</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -104,7 +139,8 @@
                                                         <td>mentor</td>
                                                         <td>revision</td>
                                                         <td>
-                                                            <button class="btn btn-success text-nowrap" style="cursor: default">approve</button>
+                                                            <button class="btn btn-success text-nowrap"
+                                                                style="cursor: default">approve</button>
                                                         </td>
                                                     </tr>
 
@@ -117,8 +153,8 @@
                                                         <td>revision</td>
                                                         <td>
                                                             <button class="btn btn-danger text-nowrap"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#revisiModal">Revisi</button>
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#revisiModal">Revisi</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -129,7 +165,7 @@
 
                                 <!-- Cards for Mobile -->
                                 <div class="d-block d-sm-none">
-                                    <div class="card mb-3">
+                                    <div class="mb-3 card">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
                                                 <span><strong>Date:</strong> 30 October 2024</span>
@@ -141,12 +177,13 @@
                                             </div>
                                             <div class="d-flex justify-content-between">
                                                 <span><strong>Status:</strong> revision</span>
-                                                <span><button class="btn btn-success text-nowrap" style="cursor: default">Approve</button></span>
+                                                <span><button class="btn btn-success text-nowrap"
+                                                        style="cursor: default">Approve</button></span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="card mb-3">
+                                    <div class="mb-3 card">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
                                                 <span><strong>Date:</strong> 30 October 2024</span>
@@ -159,8 +196,8 @@
                                             <div class="d-flex justify-content-between">
                                                 <span><strong>Status:</strong> revision</span>
                                                 <span><button class="btn btn-danger text-nowrap"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#revisiModal">Revisi</button></span>
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#revisiModal">Revisi</button></span>
                                             </div>
                                         </div>
                                     </div>
@@ -181,53 +218,100 @@
                 </div>
             </div>
         </div>
+        <!-- Modal Revisi -->
+        <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="revisiModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="revisiModalLabel">Log Revisi Activity</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <span><i class=""></i></span>
+                                <input type="date" class="form-control" id="activityDate" name="activity_date">
+                            </div>
+                            <div class="mb-3">
+                                <label for="activityCategory" class="form-label">Projek</label>
+                                <select class="form-select" id="activityCategory" name="activity_category">
+                                    <option value="Category 1">Projek 1</option>
+                                    <option value="Category 2">Projek 2</option>
+                                    <option value="Category 3">Projek 3</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="activityDescription" class="form-label">Aktivitas Hari Ini</label>
+                                <textarea class="form-control" id="activityDescription" name="activity_description" rows="3">revisi dulu</textarea>
+                            </div>
+                            <!-- Input Revisi Pesan (disabled) -->
+                            <div class="mb-3">
+                                <label for="revisiMessage" class="form-label">Pesan Revisi</label>
+                                <input type="text" class="form-control" id="revisiMessage"
+                                    value="Tolong revisi aktivitas ini" disabled>
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100">Save Revisi</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endif
 
     @push('scripts')
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const today = new Date().toISOString().split('T')[0];
-                document.getElementById("activityDate").value = today;
+                document.getElementById("report_date").value = today;
             });
         </script>
-    @endpush
 
-    <!-- Modal Revisi -->
-    <div class="modal fade" id="revisiModal" tabindex="-1" aria-labelledby="revisiModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="revisiModalLabel">Log Revisi Activity</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="#" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <span><i class=""></i></span>
-                            <input type="date" class="form-control" id="activityDate" name="activity_date">
-                        </div>
-                        <div class="mb-3">
-                            <label for="activityCategory" class="form-label">Projek</label>
-                            <select class="form-select" id="activityCategory" name="activity_category">
-                                <option value="Category 1">Projek 1</option>
-                                <option value="Category 2">Projek 2</option>
-                                <option value="Category 3">Projek 3</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="activityDescription" class="form-label">Aktivitas Hari Ini</label>
-                            <textarea class="form-control" id="activityDescription" name="activity_description" rows="3">revisi dulu</textarea>
-                        </div>
-                        <!-- Input Revisi Pesan (disabled) -->
-                        <div class="mb-3">
-                            <label for="revisiMessage" class="form-label">Pesan Revisi</label>
-                            <input type="text" class="form-control" id="revisiMessage" value="Tolong revisi aktivitas ini" disabled>
-                        </div>
-                        <button type="submit" class="btn btn-warning w-100">Save Revisi</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById("report_date").value = today;
+            });
+
+            const quill = new Quill('#editor-container', {
+                theme: 'snow',
+                placeholder: 'Type here...',
+                modules: {
+                    toolbar: [
+                        [{
+                            'header': '1'
+                        }, {
+                            'header': '2'
+                        }],
+                        [{
+                            'list': 'ordered'
+                        }, {
+                            'list': 'bullet'
+                        }],
+                        ['bold', 'italic', 'underline'],
+                        ['link']
+                    ]
+                }
+            });
+
+            quill.root.innerHTML = `{!! old('activity') !!}`;
+
+            // Function to validate word count
+            function validateContent() {
+                const content = quill.getText().trim();
+                const wordCount = content.split(/\s+/).length;
+
+                if (wordCount < 2) {
+                    document.getElementById('word-count-error').style.display = 'block';
+                    return false;
+                } else {
+                    document.getElementById('word-count-error').style.display = 'none';
+                    document.querySelector('#editor-content').value = quill.root.innerHTML;
+                    return true;
+                }
+            }
+        </script>
+    @endpush
 </x-app-layouts>

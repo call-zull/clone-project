@@ -22,7 +22,7 @@ class LoginController extends Controller
             case 'dosen':
                 return redirect()->route('dosen.dashboard');
             default:
-                return redirect('/'); // Fallback
+                return redirect('/');  
         }
     }
 
