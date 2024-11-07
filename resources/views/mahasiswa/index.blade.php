@@ -140,7 +140,7 @@
                                                             <td>{{ $activity->project_id ? $activity->project_id : '-' }}
                                                             </td>
                                                             <td>{!! $activity->activity !!}</td>
-                                                            <td>{{ $activity->user->name }}</td>
+                                                            <td>{{ $activity->cheked_by ?? '-' }}</td>
                                                             <td>
                                                                 @if ($activity->status == '' || $activity->status == 1)
                                                                     Pending
@@ -149,6 +149,7 @@
                                                                 @elseif ($activity->status == 3)
                                                                     Approved
                                                                 @else
+                                                                    Unknown
                                                                 @endif
                                                             </td>
 
