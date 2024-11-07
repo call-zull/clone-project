@@ -13,7 +13,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $activity = Report::where('user_id', $user->id)
+        $activity = Report::with('checker', 'project')->where('user_id', $user->id)
             ->orderBy('id', 'desc')
             ->get();
         $projects = Project::all();

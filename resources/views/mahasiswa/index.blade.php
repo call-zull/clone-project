@@ -135,7 +135,7 @@
                                                             <td>{{ $activity->report_date }}</td>
                                                             <td>{{ $activity->cpl ? $activity->cpl->name : '-' }}</td>
                                                             {{-- ganti nanti projek id ini dengan nama relation modelnya --}}
-                                                            <td>{{ $activity->project_id ? $activity->project_id : '-' }}
+                                                            <td>{{ $activity->project->name ? $activity->project->name : '-' }}
                                                             </td>
                                                             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
                                                                 {!! $activity->activity !!}
