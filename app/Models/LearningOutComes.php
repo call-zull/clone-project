@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class LearningOutComes extends Model
 {
@@ -23,5 +24,10 @@ class LearningOutComes extends Model
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class);
+    }
+
+    public function reports(): BelongsToMany
+    {
+        return $this->belongsToMany(Report::class);
     }
 }
