@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Models/Position.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1730967277999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1730967284408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n         'name',\n     ];\n \n     public function users()\n-{\n-    return $this->hasMany(User::class);\n+    {\n+        return $this->hasMany(User::class);\n }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1730967277999,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass Position extends Model\n{\n    protected $fillable = [\n        'name',\n    ];\n\n    public function users()\n{\n    return $this->hasMany(User::class);\n}\n}"
+        }
+    ]
+}
