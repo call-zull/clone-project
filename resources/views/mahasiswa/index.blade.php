@@ -63,53 +63,51 @@
                                                     onsubmit="return validateContent()">
                                                     @csrf
 
-                                                    {{-- {{ Auth::user()->batchUsers->batch_id }}
-                                                    {{ Auth::user()->id }}
-                                                    {{ Auth::user()->position_id }} --}}
-
                                                     <input type="hidden" name="batch_id"
                                                         value="{{ Auth::user()->batchUsers->batch_id }}">
                                                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                     <input type="hidden" name="position_id"
                                                         value="{{ Auth::user()->position_id }}">
 
-                                                    {{-- jika login sebagai dosen / mentor --}}
-                                                    {{-- <input type="hidden" name="status" value="1"> --}}
-                                                    {{-- ini nanri berdasarkan role yg login --}}
-                                                    {{-- <input type="hidden" name="cheked_by" value="1"> --}}
-                                                    {{-- jika login sebagai dosen / mentor --}}
-                                                    {{-- <input type="hidden" name="rejected_reason" value="kurang rapi"> --}}
-
                                                     <div class="mb-3">
-                                                        <span><i class=""></i></span>
                                                         <input type="date" class="form-control" id="report_date"
                                                             name="report_date" readonly>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="project_id" class="form-label">Projek</label>
                                                         <select class="form-select" id="project_id" name="project_id">
-                                                            <option value="1">Projek 1</option>
-                                                            <option value="2">Projek 2</option>
-                                                            <option value="3">Projek 3</option>
+                                                            @foreach ($projects as $project)
+                                                                <option value="{{ $project->id }}"
+                                                                    {{ old('project_id') == $project->id ? 'selected' : '' }}>
+                                                                    {{ $project->name }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
+
                                                     <div class="mb-3">
                                                         <label for="activityDescription" class="form-label">Aktivitas
                                                             Hari Ini</label>
                                                         <div class="p-2 my-2 border">
                                                             <label for="activity">Activity</label>
-                                                            <div id="editor-container"></div>
-                                                            <input type="hidden" name="activity" id="editor-content">
-                                                            <div id="word-count-error" class="mt-2 text-danger">
-                                                                <span>
-                                                                    The activity must contain at least 10 words.
-                                                                </span>
+
+                                                            <!-- Trix Editor -->
+                                                            <input id="editor-content" type="hidden" name="activity">
+                                                            <trix-editor input="editor-content"></trix-editor>
+
+                                                            <!-- Error Message -->
+                                                            <div id="word-count-error" class="mt-2 text-danger"
+                                                                style="display: none;">
+                                                                <span>The activity must contain at least 10
+                                                                    words.</span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary w-100">Save
-                                                        Activity</button>
+
+                                                    <button type="submit" id="save-button" disabled
+                                                        class="btn btn-primary w-100">Save Activity</button>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -139,8 +137,11 @@
                                                             {{-- ganti nanti projek id ini dengan nama relation modelnya --}}
                                                             <td>{{ $activity->project_id ? $activity->project_id : '-' }}
                                                             </td>
-                                                            <td>{!! $activity->activity !!}</td>
-                                                            <td>{{ $activity->cheked_by ?? '-' }}</td>
+                                                            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
+                                                                {!! $activity->activity !!}
+                                                            </td>
+
+                                                            <td>{{ $activity->checker->name ?? '-' }}</td>
                                                             <td>
                                                                 @if ($activity->status == '' || $activity->status == 1)
                                                                     Pending
@@ -289,47 +290,29 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                const today = new Date().toISOString().split('T')[0];
-                document.getElementById("report_date").value = today;
+                const editorContent = document.querySelector("#editor-content");
+                const errorElement = document.getElementById("word-count-error");
+                const saveButton = document.getElementById("save-button");
+
+                document.addEventListener("trix-change", function(event) {
+                    validateContent();
+                });
+
+                window.validateContent = function() {
+                    const content = editorContent.value.trim();
+                    const wordCount = content.split(/\s+/).filter(word => word.length > 0).length;
+
+                    if (wordCount < 3) {
+                        errorElement.style.display = "block";
+                        saveButton.disabled = true;
+                        return false;
+                    } else {
+                        errorElement.style.display = "none";
+                        saveButton.disabled = false;
+                        return true;
+                    }
+                };
             });
-
-            const quill = new Quill('#editor-container', {
-                theme: 'snow',
-                placeholder: 'Type here...',
-                modules: {
-                    toolbar: [
-                        [{
-                            'header': '1'
-                        }, {
-                            'header': '2'
-                        }],
-                        [{
-                            'list': 'ordered'
-                        }, {
-                            'list': 'bullet'
-                        }],
-                        ['bold', 'italic', 'underline'],
-                        ['link']
-                    ]
-                }
-            });
-
-            quill.root.innerHTML = `{!! old('activity') !!}`;
-
-            // Function to validate word count
-            function validateContent() {
-                const content = quill.getText().trim();
-                const wordCount = content.split(/\s+/).length;
-
-                if (wordCount < 0) {
-                    document.getElementById('word-count-error').style.display = 'block';
-                    return false;
-                } else {
-                    document.getElementById('word-count-error').style.display = 'none';
-                    document.querySelector('#editor-content').value = quill.root.innerHTML;
-                    return true;
-                }
-            }
         </script>
     @endpush
 </x-app-layouts>

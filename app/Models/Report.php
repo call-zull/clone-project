@@ -28,4 +28,19 @@ class Report extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function position(): BelongsTo
+    {
+        return $this->belongsTo(Position::class);
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function checker(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'cheked_by');
+    }
 }

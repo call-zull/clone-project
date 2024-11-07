@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,8 @@ class MahasiswaController extends Controller
         $activity = Report::where('user_id', $user->id)
             ->orderBy('id', 'desc')
             ->get();
-
-        return view('mahasiswa.index', compact('activity'));
+        $projects = Project::all();
+        return view('mahasiswa.index', compact('activity', 'projects'));
     }
 
     public function storeActivityReport(Request $request)
