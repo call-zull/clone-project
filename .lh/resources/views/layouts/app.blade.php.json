@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1730860124864,
@@ -20,6 +20,10 @@
                 {
                     "date": 1730861610227,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,16 +27,9 @@\n             {{ $slot }}\n         </main>\n         @include('includes.script')\n     </div>\n-    <script>\n-        $(document).ready(function() {\n-            // Inisialisasi Select2 pada modal setelah modal ditampilkan\n-            $('#approveModal').on('shown.bs.modal', function () {\n-                $('.js-example-basic-multiple').select2();\n-            });\n-        });\n-    </script>\n+    \n     @stack('scripts')\n </body>\n \n </html>\n"
+                },
+                {
+                    "date": 1730943210157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         <script src=\"https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js\"></script>\n     @stack('styles')\n </head>\n \n-<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\">\n+<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\" style=\"overflow: hidden;\">\n     <div class=\"app-wrapper\">\n         @auth\n             @include('includes.header')\n \n"
                 }
             ],
             "date": 1730860124864,
