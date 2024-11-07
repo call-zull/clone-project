@@ -20,6 +20,22 @@ class Report extends Model
         'rejected_reason',
     ];
 
+    public function scopeFilter($query, $params)
+    {
+        $query->when(@$params['search'], function ($query, $search) {
+            $query->where('activity', 'LIKE', "%{$search}%");
+        });
+
+        $query->when(@$params['year'], function ($query, $year) {
+            $query->whereYear('report_date', $year);
+        });
+
+        $query->when(@$params['month'], function ($query, $month) {
+            $query->whereMonth('report_date', $month);
+        });
+    }
+
+
     public function batch(): BelongsTo
     {
         return $this->belongsTo(Batch::class);

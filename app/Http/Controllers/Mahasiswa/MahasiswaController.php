@@ -14,14 +14,19 @@ class MahasiswaController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $activities = Report::with('checker', 'project')->where('user_id', $user->id)
+        $params = request()->query();
+
+        $activities = Report::with('checker', 'project')
+            ->where('user_id', $user->id)
             ->orderBy('report_date', 'desc')
             ->orderBy('created_at', 'desc')
+            ->filter($params)
             ->paginate(10);
-        // ->get();
+
         $projects = Project::all();
         return view('mahasiswa.index', compact('activities', 'projects'));
     }
+
 
     public function storeActivityReport(ActivityRequest $request)
     {

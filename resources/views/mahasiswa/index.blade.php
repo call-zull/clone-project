@@ -14,24 +14,59 @@
                                                 Activity</span>
                                             <div
                                                 class="mt-3 d-flex flex-column flex-sm-row align-items-center mt-sm-0 w-100 w-sm-auto">
-                                                <!-- Dropdown Filter (Baris Kedua pada Mobile) -->
                                                 <div class="mb-3 d-flex w-100 w-sm-auto mb-sm-0">
-                                                    <form action="" method="GET" class="d-flex w-100">
-                                                        <select name="" id="" class="form-select me-2">
-                                                            <option value="">2024</option>
-                                                            <option value="">All</option>
-                                                            <option value="">Today</option>
-                                                            <option value="">This Week</option>
-                                                            <option value="">This Month</option>
+                                                    <form action="{{ route('mahasiswa.dashboard') }}" method="GET"
+                                                        class="d-flex w-100">
+                                                        <select name="year" class="form-select me-2">
+                                                            <?php
+                                                            $currentYear = date('Y');
+                                                            $endYear = 2023; // Set the ending year to 2023
+
+                                                            for ($year = $currentYear; $year >= $endYear; $year--) {
+                                                                $selected = $year == $currentYear ? 'selected' : '';
+                                                                echo "<option value=\"$year\" $selected>$year</option>";
+                                                            }
+                                                            ?>
                                                         </select>
-                                                        <select name="" id="" class="form-select me-2">
-                                                            <option value="">October</option>
-                                                            <option value="">All</option>
-                                                            <option value="">Category 1</option>
-                                                            <option value="">Category 2</option>
-                                                            <option value="">Category 3</option>
+
+                                                        <select name="month" id="" class="form-select me-2">
+                                                            <option value="1"
+                                                                {{ date('n') == 1 ? 'selected' : '' }}>Januari</option>
+                                                            <option value="2"
+                                                                {{ date('n') == 2 ? 'selected' : '' }}>Februari</option>
+                                                            <option value="3"
+                                                                {{ date('n') == 3 ? 'selected' : '' }}>Maret</option>
+                                                            <option value="4"
+                                                                {{ date('n') == 4 ? 'selected' : '' }}>April</option>
+                                                            <option value="5"
+                                                                {{ date('n') == 5 ? 'selected' : '' }}>Mei</option>
+                                                            <option value="6"
+                                                                {{ date('n') == 6 ? 'selected' : '' }}>Juni</option>
+                                                            <option value="7"
+                                                                {{ date('n') == 7 ? 'selected' : '' }}>Juli</option>
+                                                            <option value="8"
+                                                                {{ date('n') == 8 ? 'selected' : '' }}>Agustus</option>
+                                                            <option value="9"
+                                                                {{ date('n') == 9 ? 'selected' : '' }}>September
+                                                            </option>
+                                                            <option value="10"
+                                                                {{ date('n') == 10 ? 'selected' : '' }}>Oktober
+                                                            </option>
+                                                            <option value="11"
+                                                                {{ date('n') == 11 ? 'selected' : '' }}>November
+                                                            </option>
+                                                            <option value="12"
+                                                                {{ date('n') == 12 ? 'selected' : '' }}>Desember
+                                                            </option>
                                                         </select>
-                                                        <button type="submit" class="btn btn-primary">Filter</button>
+
+
+
+                                                        <input type="text" name="search" class="form-control"
+                                                            placeholder="Search..." aria-label="Search"
+                                                            aria-describedby="search-icon">
+                                                        <button type="submit" class="btn btn-primary"><i
+                                                                class="bi bi-search"></i></button>
                                                     </form>
                                                 </div>
 
@@ -340,8 +375,8 @@
 
                                 </div>
 
-                                <div class="card-footer clearfix">
-                                    <ul class="pagination pagination-sm justify-content-center m-0">
+                                <div class="clearfix card-footer">
+                                    <ul class="m-0 pagination pagination-sm justify-content-center">
                                         {{ $activities->withQueryString()->links() }}
                                     </ul>
                                 </div>
