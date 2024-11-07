@@ -11,7 +11,7 @@ class ActivityRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class ActivityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // 'project_id' => 'required',
+            'activity' => 'required|string',
+            'report_date' => 'required|date',
+            'status' => 'nullable',
+            'cheked_by' => 'nullable',
+            'rejected_reason' => 'nullable|string',
         ];
     }
 }
