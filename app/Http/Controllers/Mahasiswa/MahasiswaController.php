@@ -17,7 +17,8 @@ class MahasiswaController extends Controller
         $activities = Report::with('checker', 'project')->where('user_id', $user->id)
             ->orderBy('report_date', 'desc')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(10);
+        // ->get();
         $projects = Project::all();
         return view('mahasiswa.index', compact('activities', 'projects'));
     }
