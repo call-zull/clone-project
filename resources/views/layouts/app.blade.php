@@ -16,7 +16,7 @@
     @stack('styles')
 </head>
 
-<body class="layout-fixed sidebar-expand-lg bg-body-tertiary" style="overflow: hidden;">
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper">
         @auth
             @include('includes.header')

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1730860124864,
@@ -24,6 +24,18 @@
                 {
                     "date": 1730943210157,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         <script src=\"https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js\"></script>\n     @stack('styles')\n </head>\n \n-<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\">\n+<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\" style=\"overflow: hidden;\">\n     <div class=\"app-wrapper\">\n         @auth\n             @include('includes.header')\n \n"
+                },
+                {
+                    "date": 1730956853860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         <script src=\"https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js\"></script>\n     @stack('styles')\n </head>\n \n-<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\" style=\"overflow: hidden;\">\n+<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\" >\n     <div class=\"app-wrapper\">\n         @auth\n             @include('includes.header')\n \n"
+                },
+                {
+                    "date": 1730956862765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         <script src=\"https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js\"></script>\n     @stack('styles')\n </head>\n \n-<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\" >\n+<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\" style=\"overflow: hidden;\">\n     <div class=\"app-wrapper\">\n         @auth\n             @include('includes.header')\n \n"
+                },
+                {
+                    "date": 1730956995379,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         <script src=\"https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js\"></script>\n     @stack('styles')\n </head>\n \n-<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\" style=\"overflow: hidden;\">\n+<body class=\"layout-fixed sidebar-expand-lg bg-body-tertiary\">\n     <div class=\"app-wrapper\">\n         @auth\n             @include('includes.header')\n \n"
                 }
             ],
             "date": 1730860124864,
