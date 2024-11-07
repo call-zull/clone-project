@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BatchController as AdminBatchController;
 use App\Http\Controllers\Admin\LearningOutComeController;
 use App\Http\Controllers\Admin\PositionController;
+use App\Http\Controllers\Mahasiswa\MahasiswaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,9 +42,13 @@ Route::prefix('dosen')->middleware(['auth', 'role:dosen'])->group(function () {
 });
 
 Route::prefix('mahasiswa')->middleware(['auth', 'role:mahasiswa'])->group(function () {
-    Route::get('/', function () {
-        return view('mahasiswa.index');
-    })->name('mahasiswa.dashboard');
+
+    // Route::get('/', function () {
+    //     return view('mahasiswa.index');
+    // })->name('mahasiswa.dashboard');
+
+    Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.dashboard');
+    Route::post('activity/report/store', [MahasiswaController::class, 'storeActivityReport'])->name('activity.report.store');
 });
 
 Route::prefix('admin')->middleware(['auth', 'role:admin,mentor,dosen'])->group(function () {
