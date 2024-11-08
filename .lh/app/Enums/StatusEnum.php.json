@@ -1,0 +1,58 @@
+{
+    "sourceFile": "app/Enums/StatusEnum.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1731033458064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1731033506937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace App\\Enums;\n \n use BenSampo\\Enum\\Enum;\n+use BenSampo\\Enum\\Attributes\\Description;\n \n /**\n  * @method static static OptionOne()\n  * @method static static OptionTwo()\n"
+                },
+                {
+                    "date": 1731033710504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n  * @method static static OptionThree()\n  */\n final class StatusEnum extends Enum\n {\n-    #[Description('mentor')]\n+    #[Description('approve')]\n     const mentor = \"mentor\";\n \n     #[Description('admin')]\n     const admin = \"admin\";\n"
+                },
+                {
+                    "date": 1731033739217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,15 +11,15 @@\n  * @method static static OptionThree()\n  */\n final class StatusEnum extends Enum\n {\n-    #[Description('approve')]\n+    #[Description('approved')]\n     const mentor = \"mentor\";\n \n-    #[Description('admin')]\n+    #[Description('revisi')]\n     const admin = \"admin\";\n \n-    #[Description('dosen')]\n+    #[Description('pending')]\n     const dosen = \"dosen\";\n \n     #[Description('mahasiswa')]\n     const mahasiswa = \"mahasiswa\";\n"
+                },
+                {
+                    "date": 1731033751309,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n  */\n final class StatusEnum extends Enum\n {\n     #[Description('approved')]\n-    const mentor = \"mentor\";\n+    const mentor = \"approved\";\n \n     #[Description('revisi')]\n     const admin = \"admin\";\n \n"
+                },
+                {
+                    "date": 1731033778929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     #[Description('approved')]\n     const mentor = \"approved\";\n \n     #[Description('revisi')]\n-    const admin = \"admin\";\n+    const admin = \"revisi\";\n \n     #[Description('pending')]\n     const dosen = \"dosen\";\n \n"
+                },
+                {
+                    "date": 1731033789879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,5 @@\n \n     #[Description('pending')]\n     const dosen = \"dosen\";\n \n-    #[Description('mahasiswa')]\n-    const mahasiswa = \"mahasiswa\";\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1731033796996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,7 +18,7 @@\n     #[Description('revisi')]\n     const admin = \"revisi\";\n \n     #[Description('pending')]\n-    const dosen = \"dosen\";\n+    const dosen = \"pending\";\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1731033802426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,12 +13,12 @@\n final class StatusEnum extends Enum\n {\n     #[Description('approved')]\n     const mentor = \"approved\";\n+    #[Description('pending')]\n+    const dosen = \"pending\";\n \n     #[Description('revisi')]\n     const admin = \"revisi\";\n \n-    #[Description('pending')]\n-    const dosen = \"pending\";\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1731034044085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,12 +12,12 @@\n  */\n final class StatusEnum extends Enum\n {\n     #[Description('approved')]\n-    const mentor = \"approved\";\n+    const approved = \"approved\";\n \n     #[Description('pending')]\n-    const dosen = \"pending\";\n+    const pending = \"pending\";\n \n     #[Description('revisi')]\n     const admin = \"revisi\";\n \n"
+                },
+                {
+                    "date": 1731034050501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,8 @@\n     #[Description('pending')]\n     const pending = \"pending\";\n \n     #[Description('revisi')]\n-    const admin = \"revisi\";\n+    const revisi = \"revisi\";\n \n \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1731033458064,
+            "name": "Commit-0",
+            "content": "<?php declare(strict_types=1);\n\nnamespace App\\Enums;\n\nuse BenSampo\\Enum\\Enum;\n\n/**\n * @method static static OptionOne()\n * @method static static OptionTwo()\n * @method static static OptionThree()\n */\nfinal class StatusEnum extends Enum\n{\n    #[Description('mentor')]\n    const mentor = \"mentor\";\n\n    #[Description('admin')]\n    const admin = \"admin\";\n\n    #[Description('dosen')]\n    const dosen = \"dosen\";\n\n    #[Description('mahasiswa')]\n    const mahasiswa = \"mahasiswa\";\n\n}"
+        }
+    ]
+}

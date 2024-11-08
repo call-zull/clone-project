@@ -1,0 +1,38 @@
+{
+    "sourceFile": "app/Models/Report.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1731033864444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1731033891227,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\n \n namespace App\\Models;\n \n+use App\\Enums\\StatusEnum;\n use Illuminate\\Database\\Eloquent\\Model;\n use Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;\n use Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany;\n \n@@ -36,9 +37,9 @@\n     }\n \n     public function roleDescription(): Attribute\n     {\n-        return Attribute::make(fn() => $this->role ? RoleEnum::getDescription((int) $this->role) : null);\n+        return Attribute::make(fn() => $this->role ? StatusEnum::getDescription((int) $this->role) : null);\n     }\n \n \n     public function batch(): BelongsTo\n"
+                },
+                {
+                    "date": 1731033937593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n     }\n \n     public function roleDescription(): Attribute\n     {\n-        return Attribute::make(fn() => $this->role ? StatusEnum::getDescription((int) $this->role) : null);\n+        return Attribute::make(fn() => $this->role ? StatusEnum::getDescription((string) $this->role) : null);\n     }\n \n \n     public function batch(): BelongsTo\n"
+                },
+                {
+                    "date": 1731033979365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace App\\Models;\n \n use App\\Enums\\StatusEnum;\n+use Illuminate\\Database\\Eloquent\\Casts\\Attribute;\n use Illuminate\\Database\\Eloquent\\Model;\n use Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;\n use Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany;\n \n"
+                },
+                {
+                    "date": 1731034224566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n     }\n \n     public function roleDescription(): Attribute\n     {\n-        return Attribute::make(fn() => $this->role ? StatusEnum::getDescription((string) $this->role) : null);\n+        return Attribute::make(fn() => $this->role ? StatusEnum::getDescription((int) $this->role) : null);\n     }\n \n \n     public function batch(): BelongsTo\n"
+                },
+                {
+                    "date": 1731034231607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n             $query->whereMonth('report_date', $month);\n         });\n     }\n \n-    public function roleDescription(): Attribute\n+    public function statusDescription(): Attribute\n     {\n         return Attribute::make(fn() => $this->role ? StatusEnum::getDescription((int) $this->role) : null);\n     }\n \n"
+                }
+            ],
+            "date": 1731033864444,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;\nuse Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany;\n\nclass Report extends Model\n{\n    protected $fillable = [\n        'batch_id',\n        'user_id',\n        'position_id',\n        'project_id',\n        'activity',\n        'report_date',\n        'status',\n        'cheked_by',\n        'rejected_reason',\n    ];\n\n    public function scopeFilter($query, $params)\n    {\n        $query->when(@$params['search'], function ($query, $search) {\n            $query->where('activity', 'LIKE', \"%{$search}%\");\n        });\n\n        $query->when(@$params['year'], function ($query, $year) {\n            $query->whereYear('report_date', $year);\n        });\n\n        $query->when(@$params['month'], function ($query, $month) {\n            $query->whereMonth('report_date', $month);\n        });\n    }\n\n    public function roleDescription(): Attribute\n    {\n        return Attribute::make(fn() => $this->role ? RoleEnum::getDescription((int) $this->role) : null);\n    }\n\n\n    public function batch(): BelongsTo\n    {\n        return $this->belongsTo(Batch::class);\n    }\n\n    public function user(): BelongsTo\n    {\n        return $this->belongsTo(User::class);\n    }\n\n    public function position(): BelongsTo\n    {\n        return $this->belongsTo(Position::class);\n    }\n\n    public function project(): BelongsTo\n    {\n        return $this->belongsTo(Project::class);\n    }\n\n    public function checker(): BelongsTo\n    {\n        return $this->belongsTo(User::class, 'cheked_by');\n    }\n\n    public function learningOutComes(): BelongsToMany\n    {\n        return $this->belongsToMany(LearningOutComes::class);\n    }\n}"
+        }
+    ]
+}

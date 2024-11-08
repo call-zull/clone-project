@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function roleDescription(): Attribute
     {
-        return Attribute::make(fn() => $this->role ? RoleEnum::getDescription((int) $this->role) : null);
+        return Attribute::make(fn() => $this->role ? RoleEnum::getDescription((string) $this->role) : null);
     }
 
     public function position()
