@@ -25,6 +25,7 @@ class LoginController extends Controller
                 return redirect('/');  
         }
     }
+    
 
     protected $redirectTo = '/home';
 

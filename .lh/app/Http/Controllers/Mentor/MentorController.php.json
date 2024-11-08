@@ -1,0 +1,70 @@
+{
+    "sourceFile": "app/Http/Controllers/Mentor/MentorController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1731051458709,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1731051744097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,42 +31,42 @@\n \n     /**\n      * Approve a student's activity report and assign CPL.\n      */\n-    public function approveReport(Request $request, $reportId)\n-    {\n-        $report = Report::findOrFail($reportId);\n+    // public function approveReport(Request $request, $reportId)\n+    // {\n+    //     $report = Report::findOrFail($reportId);\n \n-        // Validasi bahwa mentor yang sedang login adalah mentor yang sesuai\n-        if (Auth::user()->position_id != $report->position_id) {\n-            return back()->withErrors('You are not authorized to approve this report.');\n-        }\n+    //     // Validasi bahwa mentor yang sedang login adalah mentor yang sesuai\n+    //     if (Auth::user()->position_id != $report->position_id) {\n+    //         return back()->withErrors('You are not authorized to approve this report.');\n+    //     }\n \n-        // Set status laporan ke approved dan pilih CPL\n-        $report->status = 1; // 1 berarti approved\n-        $report->cheked_by = Auth::id(); // Mentor yang melakukan approval\n-        $report->learningOutComes()->sync($request->learning_outcomes); // Sync dengan CPL yang dipilih\n-        $report->save();\n+    //     // Set status laporan ke approved dan pilih CPL\n+    //     $report->status = 1; // 1 berarti approved\n+    //     $report->cheked_by = Auth::id(); // Mentor yang melakukan approval\n+    //     $report->learningOutComes()->sync($request->learning_outcomes); // Sync dengan CPL yang dipilih\n+    //     $report->save();\n \n-        return back()->with('success', 'Report approved successfully.');\n-    }\n+    //     return back()->with('success', 'Report approved successfully.');\n+    // }\n \n-    /**\n-     * Add revision message to a student's activity report.\n-     */\n-    public function reviseReport(Request $request, $reportId)\n-    {\n-        $report = Report::findOrFail($reportId);\n+    // /**\n+    //  * Add revision message to a student's activity report.\n+    //  */\n+    // public function reviseReport(Request $request, $reportId)\n+    // {\n+    //     $report = Report::findOrFail($reportId);\n \n-        // Validasi bahwa mentor yang sedang login adalah mentor yang sesuai\n-        if (Auth::user()->position_id != $report->position_id) {\n-            return back()->withErrors('You are not authorized to revise this report.');\n-        }\n+    //     // Validasi bahwa mentor yang sedang login adalah mentor yang sesuai\n+    //     if (Auth::user()->position_id != $report->position_id) {\n+    //         return back()->withErrors('You are not authorized to revise this report.');\n+    //     }\n \n-        // Simpan pesan revisi\n-        $report->rejected_reason = $request->rejected_reason;\n-        $report->status = 2; // 2 berarti revisi\n-        $report->save();\n+    //     // Simpan pesan revisi\n+    //     $report->rejected_reason = $request->rejected_reason;\n+    //     $report->status = 2; // 2 berarti revisi\n+    //     $report->save();\n \n-        return back()->with('success', 'Revisions added successfully.');\n-    }\n+    //     return back()->with('success', 'Revisions added successfully.');\n+    // }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1731051834070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     public function index()\n     {\n         // Ambil posisi mentor yang sedang login\n         $mentor = Auth::user();\n-        $positionId = $mentor->position_id;\n+        $positionId = $mentor->role;\n \n         // Ambil laporan aktivitas mahasiswa yang memiliki role sama (seposisi) dengan mentor\n         $reports = Report::with('user', 'project', 'learningOutComes')\n             ->whereHas('user', function ($query) use ($positionId) {\n"
+                },
+                {
+                    "date": 1731051846990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,10 @@\n     public function index()\n     {\n         // Ambil posisi mentor yang sedang login\n         $mentor = Auth::user();\n-        $positionId = $mentor->role;\n+        $role = $mentor->role;\n+        dd($positionId);\n \n         // Ambil laporan aktivitas mahasiswa yang memiliki role sama (seposisi) dengan mentor\n         $reports = Report::with('user', 'project', 'learningOutComes')\n             ->whereHas('user', function ($query) use ($positionId) {\n"
+                },
+                {
+                    "date": 1731051858188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     {\n         // Ambil posisi mentor yang sedang login\n         $mentor = Auth::user();\n         $role = $mentor->role;\n-        dd($positionId);\n+        dd($role);\n \n         // Ambil laporan aktivitas mahasiswa yang memiliki role sama (seposisi) dengan mentor\n         $reports = Report::with('user', 'project', 'learningOutComes')\n             ->whereHas('user', function ($query) use ($positionId) {\n"
+                },
+                {
+                    "date": 1731051917426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,10 @@\n     public function index()\n     {\n         // Ambil posisi mentor yang sedang login\n         $mentor = Auth::user();\n-        $role = $mentor->role;\n-        dd($role);\n+        $positionId = $mentor->position_id;\n+        dd($positionId);\n \n         // Ambil laporan aktivitas mahasiswa yang memiliki role sama (seposisi) dengan mentor\n         $reports = Report::with('user', 'project', 'learningOutComes')\n             ->whereHas('user', function ($query) use ($positionId) {\n"
+                },
+                {
+                    "date": 1731052013125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,10 @@\n                 $query->where('position_id', $positionId); // Filter berdasarkan posisi yang sama\n             })\n             ->get();\n \n+        dd($reports);\n+\n         return view('mentor.index', compact('reports'));\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1731052263852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     {\n         // Ambil posisi mentor yang sedang login\n         $mentor = Auth::user();\n         $positionId = $mentor->position_id;\n-        dd($positionId);\n+        // dd($positionId);\n \n         // Ambil laporan aktivitas mahasiswa yang memiliki role sama (seposisi) dengan mentor\n         $reports = Report::with('user', 'project', 'learningOutComes')\n             ->whereHas('user', function ($query) use ($positionId) {\n"
+                },
+                {
+                    "date": 1731052360570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,19 +17,20 @@\n     {\n         // Ambil posisi mentor yang sedang login\n         $mentor = Auth::user();\n         $positionId = $mentor->position_id;\n-        // dd($positionId);\n \n-        // Ambil laporan aktivitas mahasiswa yang memiliki role sama (seposisi) dengan mentor\n-        $reports = Report::with('user', 'project', 'learningOutComes')\n+        // Ambil laporan aktivitas mahasiswa yang memiliki posisi sama dengan mentor\n+        $reports = Report::with('user', 'project') // Mengambil data terkait user dan project\n             ->whereHas('user', function ($query) use ($positionId) {\n                 $query->where('position_id', $positionId); // Filter berdasarkan posisi yang sama\n             })\n             ->get();\n \n+        // Dump untuk debug (opsional)\n         dd($reports);\n \n+        // Tampilkan laporan ke view\n         return view('mentor.index', compact('reports'));\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1731052435284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n             })\n             ->get();\n \n         // Dump untuk debug (opsional)\n-        dd($reports);\n+        // dd($reports);\n \n         // Tampilkan laporan ke view\n         return view('mentor.index', compact('reports'));\n     }\n"
+                },
+                {
+                    "date": 1731052560632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n             })\n             ->get();\n \n         // Dump untuk debug (opsional)\n-        // dd($reports);\n+        dd($reports);\n \n         // Tampilkan laporan ke view\n         return view('mentor.index', compact('reports'));\n     }\n"
+                },
+                {
+                    "date": 1731052688314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n             })\n             ->get();\n \n         // Dump untuk debug (opsional)\n-        dd($reports);\n+        // dd($reports);\n \n         // Tampilkan laporan ke view\n         return view('mentor.index', compact('reports'));\n     }\n"
+                },
+                {
+                    "date": 1731053823568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n             })\n             ->get();\n \n         // Dump untuk debug (opsional)\n-        // dd($reports);\n+        dd($reports);\n \n         // Tampilkan laporan ke view\n         return view('mentor.index', compact('reports'));\n     }\n"
+                },
+                {
+                    "date": 1731053976577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n             })\n             ->get();\n \n         // Dump untuk debug (opsional)\n-        dd($reports);\n+        // dd($reports);\n \n         // Tampilkan laporan ke view\n         return view('mentor.index', compact('reports'));\n     }\n"
+                }
+            ],
+            "date": 1731051458709,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Mentor;\n\nuse App\\Http\\Controllers\\Controller;\nuse App\\Models\\Report;\nuse App\\Models\\LearningOutComes;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Auth;\n\nclass MentorController extends Controller\n{\n    /**\n     * Display the list of activity reports that the mentor can manage.\n     */\n    public function index()\n    {\n        // Ambil posisi mentor yang sedang login\n        $mentor = Auth::user();\n        $positionId = $mentor->position_id;\n\n        // Ambil laporan aktivitas mahasiswa yang memiliki role sama (seposisi) dengan mentor\n        $reports = Report::with('user', 'project', 'learningOutComes')\n            ->whereHas('user', function ($query) use ($positionId) {\n                $query->where('position_id', $positionId); // Filter berdasarkan posisi yang sama\n            })\n            ->get();\n\n        return view('mentor.index', compact('reports'));\n    }\n\n    /**\n     * Approve a student's activity report and assign CPL.\n     */\n    public function approveReport(Request $request, $reportId)\n    {\n        $report = Report::findOrFail($reportId);\n\n        // Validasi bahwa mentor yang sedang login adalah mentor yang sesuai\n        if (Auth::user()->position_id != $report->position_id) {\n            return back()->withErrors('You are not authorized to approve this report.');\n        }\n\n        // Set status laporan ke approved dan pilih CPL\n        $report->status = 1; // 1 berarti approved\n        $report->cheked_by = Auth::id(); // Mentor yang melakukan approval\n        $report->learningOutComes()->sync($request->learning_outcomes); // Sync dengan CPL yang dipilih\n        $report->save();\n\n        return back()->with('success', 'Report approved successfully.');\n    }\n\n    /**\n     * Add revision message to a student's activity report.\n     */\n    public function reviseReport(Request $request, $reportId)\n    {\n        $report = Report::findOrFail($reportId);\n\n        // Validasi bahwa mentor yang sedang login adalah mentor yang sesuai\n        if (Auth::user()->position_id != $report->position_id) {\n            return back()->withErrors('You are not authorized to revise this report.');\n        }\n\n        // Simpan pesan revisi\n        $report->rejected_reason = $request->rejected_reason;\n        $report->status = 2; // 2 berarti revisi\n        $report->save();\n\n        return back()->with('success', 'Revisions added successfully.');\n    }\n}"
+        }
+    ]
+}

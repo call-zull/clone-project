@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BatchController as AdminBatchController;
 use App\Http\Controllers\Admin\LearningOutComeController;
 use App\Http\Controllers\Admin\PositionController;
+use App\Http\Controllers\Dosen\DosenController;
 use App\Http\Controllers\Mahasiswa\MahasiswaController;
+use App\Http\Controllers\Mentor\MentorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,15 +32,28 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
 
 Route::prefix('mentor')->middleware(['auth', 'role:mentor'])->group(function () {
-    Route::get('/', function () {
-        return view('mentor.index');
-    })->name('mentor.dashboard');
+    // Route::get('/', function () {
+    //     return view('mentor.index');
+    // })->name('mentor.dashbord');
+    Route::get('/', [MentorController::class, 'index'])->name('mentor.dashboard');
+
+    //     Route::put('/approve-report/{reportId}', [MentorController::class, 'approveReport'])->name('mentor.approveReport');
+//     Route::put('/revise-report/{reportId}', [MentorController::class, 'reviseReport'])->name('mentor.reviseReport');
 });
 
+// Route::prefix('mentor')->middleware(['auth', 'role:mentor'])->group(function () {
+//     Route::get('/', [MentorController::class, 'index'])->name('mentor.dashboard');
+
+//     Route::put('/approve-report/{reportId}', [MentorController::class, 'approveReport'])->name('mentor.approveReport');
+//     Route::put('/revise-report/{reportId}', [MentorController::class, 'reviseReport'])->name('mentor.reviseReport');
+// });
+
+
 Route::prefix('dosen')->middleware(['auth', 'role:dosen'])->group(function () {
-    Route::get('/', function () {
-        return view('dosen.index');
-    })->name('dosen.dashboard');
+    // Route::get('/', function () {
+    //     return view('dosen.index');
+    // })->name('dosen.dashboard');
+    Route::get('/', [DosenController::class, 'index'])->name('dosen.dashboard');
 });
 
 Route::prefix('mahasiswa')->middleware(['auth', 'role:mahasiswa'])->group(function () {

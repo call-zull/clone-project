@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Http/Controllers/Dosen/DosenController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1731054574388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1731054574388,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Dosen;\n\nuse App\\Http\\Controllers\\Controller;\nuse App\\Models\\Report;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Auth;\n\nclass DosenController extends Controller\n{\n    /**\n     * Menampilkan daftar laporan aktivitas yang dapat dilihat oleh dosen.\n     */\n    public function index()\n    {\n        // Ambil posisi dosen yang sedang login\n        $dosen = Auth::user();\n        $positionId = $dosen->position_id;\n\n        // Ambil laporan aktivitas mahasiswa yang memiliki posisi \"Programmer\" atau sesuai dengan yang diinginkan\n        $reports = Report::with('user', 'project')  // Mengambil data terkait user dan project\n            ->whereHas('user', function ($query) use ($positionId) {\n                // Mengambil laporan hanya untuk mahasiswa dengan posisi yang sesuai (misalnya Programmer)\n                $query->where('position_id', $positionId);  // Filter berdasarkan posisi yang sama\n            })\n            ->get();\n\n        // Tampilkan laporan ke view\n        return view('dosen.index', compact('reports'));\n    }\n}"
+        }
+    ]
+}

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 15,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1730423729469,
@@ -68,6 +68,14 @@
                 {
                     "date": 1730427772597,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <?php\n \n-// use App\\Http\\Controllers\\Admin\\UserController;\n+use App\\Http\\Controllers\\Admin\\UserController;\n use Illuminate\\Support\\Facades\\Route;\n \n Route::get('/', function () {\n     return view('welcome');\n"
+                },
+                {
+                    "date": 1731051373301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,8 +34,15 @@\n         return view('mentor.index');\n     })->name('mentor.dashboard');\n });\n \n+Route::prefix('mentor')->middleware(['auth', 'role:mentor'])->group(function () {\n+    Route::get('/', [MentorController::class, 'index']);\n+    Route::put('/approve-report/{reportId}', [MentorController::class, 'approveReport'])->name('mentor.approveReport');\n+    Route::put('/revise-report/{reportId}', [MentorController::class, 'reviseReport'])->name('mentor.reviseReport');\n+});\n+\n+\n Route::prefix('dosen')->middleware(['auth', 'role:dosen'])->group(function () {\n     Route::get('/', function () {\n         return view('dosen.index');\n     })->name('dosen.dashboard');\n@@ -55,5 +62,5 @@\n Route::prefix('admin')->middleware(['auth', 'role:admin,mentor,dosen'])->group(function () {\n     route::get('/batch', [AdminBatchController::class, 'index'])->name('bacth.index');\n     route::get('/batch/batch-{batch}/learning-outcomes', [LearningOutComeController::class, 'index'])->name('bacth.cpl.index');\n     route::get('/batch/batch-{batch}/learning-outcomes/position-{position}', [LearningOutComeController::class, 'show'])->name('bacth.cpl.show');\n-});\n+});\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1731051380403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,13 +28,13 @@\n     Route::put('/learning-outcomes/batch/{batch}/position/{position}/{learning_outcome}', [LearningOutComeController::class, 'update'])->name('learning-outcomes.update');\n });\n \n \n-Route::prefix('mentor')->middleware(['auth', 'role:mentor'])->group(function () {\n-    Route::get('/', function () {\n-        return view('mentor.index');\n-    })->name('mentor.dashboard');\n-});\n+// Route::prefix('mentor')->middleware(['auth', 'role:mentor'])->group(function () {\n+//     Route::get('/', function () {\n+//         return view('mentor.index');\n+//     })->name('mentor.dashboard');\n+// });\n \n Route::prefix('mentor')->middleware(['auth', 'role:mentor'])->group(function () {\n     Route::get('/', [MentorController::class, 'index']);\n     Route::put('/approve-report/{reportId}', [MentorController::class, 'approveReport'])->name('mentor.approveReport');\n"
                 }
             ],
             "date": 1730423729469,

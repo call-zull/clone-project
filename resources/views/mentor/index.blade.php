@@ -43,29 +43,29 @@
                                                         <th>Project</th>
                                                         <th>Task</th>
                                                         <th>Checked By: (mentor)</th>
-                                                        <th>Checked By: (dospem)</th>
                                                         <th>Status</th>
                                                         <th style="width: 40px">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="text-nowrap">
-                                                    <tr class="align-middle">
-                                                        <td>30 October 2024 - 09:53</td>
-                                                        <td>Update software</td>
-                                                        <td>cpl 1</td>
-                                                        <td>ngopi</td>
-                                                        <td>mentor</td>
-                                                        <td>my dospem</td>
-                                                        <td>revision</td>
-                                                        <td>
-                                                            <button class="btn btn-secondary text-nowrap ms-3"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#revisiModal">Revisi</button>
-                                                            <button class="btn btn-success text-nowrap ms-3"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#approveModal">Approve</button>
-                                                        </td>
-                                                    </tr>
+                                                    @foreach ($reports as $report)
+                                                        <tr class="align-middle">
+                                                            <td>{{ \Carbon\Carbon::parse($report->report_date)->format('d F Y ') }}</td> <!-- Format Tanggal -->
+                                                            <td>{{  $report->cpl ? : '-' }}</td> <!-- Aktivitas -->
+                                                            <td>{{ $report->project->name ?? 'No Project' }}</td> <!-- Nama Proyek -->
+                                                            <td>{!! $report->activity !!}</td> <!-- Task (aktivitas) dengan HTML render -->
+                                                            <td>{{ $report->cheked_by ? $report->checker->name : '-' }}</td> <!-- Mentor yang memeriksa -->
+                                                            <td>{{ $report->status? : '-' }}</td> <!-- Status laporan -->
+                                                            <td>
+                                                                <button class="btn btn-secondary text-nowrap ms-3"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#revisiModal">Revisi</button>
+                                                                <button class="btn btn-success text-nowrap ms-3"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#approveModal">Approve</button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -148,7 +148,6 @@
                     dropdownParent: $('#approveModal') 
                 });
             });
-
         });
     </script>
 </x-app-layouts>

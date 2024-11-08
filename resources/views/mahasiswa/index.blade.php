@@ -16,7 +16,7 @@
                                                 class="mt-3 d-flex flex-column flex-sm-row align-items-center mt-sm-0 w-100 w-sm-auto">
                                                 <div class="mb-3 d-flex w-100 w-sm-auto mb-sm-0">
                                                     <form action="{{ route('mahasiswa.dashboard') }}" method="GET"
-                                                        class="d-flex w-100">
+                                                        class="d-flex">
                                                         <select name="year" class="form-select me-2">
                                                             <?php
                                                             $currentYear = date('Y');
@@ -29,7 +29,7 @@
                                                             ?>
                                                         </select>
 
-                                                        <select name="month" id="" class="form-select me-2">
+                                                        <select name="month" id="" class="form-select me-2 w-auto">
                                                             <option value="1"
                                                                 {{ date('n') == 1 ? 'selected' : '' }}>Januari</option>
                                                             <option value="2"
@@ -62,7 +62,7 @@
 
 
 
-                                                        <input type="text" name="search" class="form-control"
+                                                        <input type="text" name="search" class="form-control me-2"
                                                             placeholder="Search..." aria-label="Search"
                                                             aria-describedby="search-icon">
                                                         <button type="submit" class="btn btn-primary"><i

@@ -43,25 +43,20 @@
                                                         <th>Project</th>
                                                         <th>Task</th>
                                                         <th>Checked By: (mentor)</th>
-                                                        <th>Checked By: (dospem)</th>
-                                                        <th>Revision</th>
-                                                        {{-- <th style="width: 40px">Status</th> --}}
+                                                        <th>Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="text-nowrap">
-                                                    <tr class="align-middle">
-                                                        <td>30 October 2024 - 09:53</td>
-                                                        <td>Update software</td>
-                                                        <td>cpl 1</td>
-                                                        <td>ngopi</td>
-                                                        <td>mentor</td>
-                                                        <td>my dospem</td>
-                                                        <td>revision</td>
-                                                        {{-- <td>
-                                                            <a href="">revisi</a>
-                                                            <a href="">setuju</a>
-                                                        </td> --}}
-                                                    </tr>
+                                                    @foreach ($reports as $report)
+                                                        <tr class="align-middle">
+                                                            <td>{{ \Carbon\Carbon::parse($report->report_date)->format('d F Y') }}</td>
+                                                            <td>{{ $report->cpl ?? '-' }}</td>
+                                                            <td>{{ $report->project->name ?? 'No Project' }}</td>
+                                                            <td>{!! $report->activity !!}</td>
+                                                            <td>{{ $report->cheked_by ? $report->checker->name : '-' }}</td>
+                                                            <td>{{ $report->rejected_reason ?? '-' }}</td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
