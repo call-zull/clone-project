@@ -13,14 +13,14 @@ use BenSampo\Enum\Attributes\Description;
 final class StatusEnum extends Enum
 {
 
-    #[Description('pending')]
-    const pending = 0;
+    #[Description('PENDING')]
+    const pending = 1;
 
-    #[Description('approved')]
-    const approved = 1;
+    #[Description('APPROVED')]
+    const approved = 2;
 
-    #[Description('revisi')]
-    const revisi = 2;
+    #[Description('REVISION')]
+    const revisi = 3;
 
 
 }
