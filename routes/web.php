@@ -36,9 +36,11 @@ Route::prefix('mentor')->middleware(['auth', 'role:mentor'])->group(function () 
     //     return view('mentor.index');
     // })->name('mentor.dashbord');
     Route::get('/', [MentorController::class, 'index'])->name('mentor.dashboard');
+    Route::get('/profile', [MentorController::class, 'profile'])->name('mentor.profile');
+
 
     //     Route::put('/approve-report/{reportId}', [MentorController::class, 'approveReport'])->name('mentor.approveReport');
-//     Route::put('/revise-report/{reportId}', [MentorController::class, 'reviseReport'])->name('mentor.reviseReport');
+    //     Route::put('/revise-report/{reportId}', [MentorController::class, 'reviseReport'])->name('mentor.reviseReport');
 });
 
 // Route::prefix('mentor')->middleware(['auth', 'role:mentor'])->group(function () {

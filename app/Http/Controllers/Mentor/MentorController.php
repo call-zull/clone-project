@@ -33,6 +33,11 @@ class MentorController extends Controller
         return view('mentor.index', compact('reports'));
     }
 
+    public function profile()
+    {
+        return view('mentor.profile');
+    }
+
     /**
      * Approve a student's activity report and assign CPL.
      */

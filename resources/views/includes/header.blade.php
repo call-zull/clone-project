@@ -16,7 +16,8 @@
                 <li class="nav-item d-none d-md-block ms-3">
                     <form action="" method="get" class="d-flex">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="search-icon">
+                            <input type="text" name="search" class="form-control" placeholder="Search..."
+                                aria-label="Search" aria-describedby="search-icon">
                             <span class="input-group-text" id="search-icon">
                                 <i class="bi bi-search"></i>
                             </span>
@@ -47,7 +48,7 @@
                         <p>{{ Auth::user()->name }}</p>
                     </li>
                     <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        <a href="{{ route('mentor.profile') }}" class="btn btn-default btn-flat">Profile</a>
                         <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-end"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Sign out
